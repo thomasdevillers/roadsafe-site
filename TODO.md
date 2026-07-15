@@ -30,7 +30,6 @@ Complete these items before the production site replaces the current website.
 
 ## Trust Content
 
-- Replace the four homepage client-logo placeholders with approved logos.
 - Add approved testimonials or case studies with names, companies and outcomes.
 - Add relevant certifications, warranties and service commitments.
 

@@ -23,6 +23,33 @@ const featuredProducts = [
   getProduct("speed-radars/speed-sentinel-compact")
 ].filter((product) => Boolean(product));
 
+const clients = [
+  {
+    name: "WBHO",
+    image: "/images/client-wbho.jpeg",
+    width: 200,
+    height: 200
+  },
+  {
+    name: "Tau Pele Infrastructure",
+    image: "/images/client-tau-pele.jpeg",
+    width: 447,
+    height: 447
+  },
+  {
+    name: "South African National Roads Agency",
+    image: "/images/client-sanral.jpeg",
+    width: 447,
+    height: 447
+  },
+  {
+    name: "Raubex",
+    image: "/images/client-raubex.jpg",
+    width: 200,
+    height: 200
+  }
+];
+
 export default function HomePage() {
   return (
     <>
@@ -210,11 +237,16 @@ export default function HomePage() {
               practical deployment and responsive service.
             </p>
           </div>
-          <div className="client-placeholder-grid" aria-label="Client logo placeholders">
-            {["CLIENT 01", "CLIENT 02", "CLIENT 03", "CLIENT 04"].map((label) => (
-              <div className="client-placeholder" key={label}>
-                <span aria-hidden="true">RT</span>
-                <p>{label}</p>
+          <div className="client-logo-grid" aria-label="Roadsafe clients">
+            {clients.map((client) => (
+              <div className="client-logo" key={client.name}>
+                <Image
+                  src={client.image}
+                  alt={`${client.name} logo`}
+                  width={client.width}
+                  height={client.height}
+                  sizes="(max-width: 680px) 70vw, (max-width: 1120px) 35vw, 220px"
+                />
               </div>
             ))}
           </div>
