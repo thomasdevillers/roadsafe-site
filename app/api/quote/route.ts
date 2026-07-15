@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
 
 type QuoteProduct = {
   product: string;
@@ -37,6 +36,57 @@ function quoteReference() {
 
 function isValidEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+type BrevoEmail = {
+  apiKey: string;
+  sender: {
+    email: string;
+    name: string;
+  };
+  to: {
+    email: string;
+    name?: string;
+  };
+  replyTo: {
+    email: string;
+    name?: string;
+  };
+  subject: string;
+  htmlContent: string;
+};
+
+async function sendBrevoEmail({
+  apiKey,
+  sender,
+  to,
+  replyTo,
+  subject,
+  htmlContent
+}: BrevoEmail) {
+  const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+    method: "POST",
+    headers: {
+      accept: "application/json",
+      "api-key": apiKey,
+      "content-type": "application/json"
+    },
+    body: JSON.stringify({
+      sender,
+      to: [to],
+      replyTo,
+      subject,
+      htmlContent
+    }),
+    cache: "no-store"
+  });
+
+  if (!response.ok) {
+    const responseBody = await response.text();
+    throw new Error(
+      `Brevo rejected the email (${response.status}): ${responseBody.slice(0, 500)}`
+    );
+  }
 }
 
 export async function POST(request: Request) {
@@ -93,7 +143,7 @@ export async function POST(request: Request) {
     <p><strong>Phone:</strong> ${escapeHtml(payload.phone)}</p>
   `;
 
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiKey = process.env.BREVO_API_KEY;
   if (!apiKey) {
     if (process.env.NODE_ENV === "development") {
       console.info(`[Roadsafe quote ${reference}]`, payload);
@@ -105,27 +155,31 @@ export async function POST(request: Request) {
     );
   }
 
-  const resend = new Resend(apiKey);
-  const from =
-    process.env.QUOTE_FROM_EMAIL ||
-    "Roadsafe Traffic <quotes@roadsafe.co.za>";
-  const to = process.env.QUOTE_TO_EMAIL || "nicki@roadsafe.co.za";
+  const sender = {
+    email: process.env.BREVO_SENDER_EMAIL || "quotes@roadsafe.co.za",
+    name: process.env.BREVO_SENDER_NAME || "Roadsafe Traffic"
+  };
+  const quoteRecipient = process.env.QUOTE_TO_EMAIL || "nicki@roadsafe.co.za";
+  const customerEmail = String(payload.email);
+  const customerName = String(payload.contactName);
 
   try {
     await Promise.all([
-      resend.emails.send({
-        from,
-        to,
-        replyTo: String(payload.email),
+      sendBrevoEmail({
+        apiKey,
+        sender,
+        to: { email: quoteRecipient, name: "Roadsafe Traffic" },
+        replyTo: { email: customerEmail, name: customerName },
         subject: `Quote request ${reference} — ${payload.company}`,
-        html: `<h1>New Roadsafe quote request</h1><p>Reference: <strong>${reference}</strong></p>${detailsHtml}`
+        htmlContent: `<h1>New Roadsafe quote request</h1><p>Reference: <strong>${reference}</strong></p>${detailsHtml}`
       }),
-      resend.emails.send({
-        from,
-        to: String(payload.email),
-        replyTo: to,
+      sendBrevoEmail({
+        apiKey,
+        sender,
+        to: { email: customerEmail, name: customerName },
+        replyTo: { email: quoteRecipient, name: "Roadsafe Traffic" },
         subject: `Roadsafe received your request — ${reference}`,
-        html: `
+        htmlContent: `
           <h1>We have received your request.</h1>
           <p>Hi ${escapeHtml(payload.contactName)},</p>
           <p>Roadsafe Traffic will review your equipment requirement and respond the same business day.</p>

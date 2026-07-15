@@ -9,9 +9,10 @@ npm install
 npm run dev
 ```
 
-Copy `.env.example` to `.env.local` and configure Resend before testing real
-email delivery. In local development, quote submissions are simulated when no
-Resend key is present.
+Copy `.env.example` to `.env.local`, verify the sender address in Brevo, and
+configure the Brevo environment variables before testing real email delivery.
+In local development, quote submissions are simulated when no Brevo API key is
+present.
 
 ## Project References
 

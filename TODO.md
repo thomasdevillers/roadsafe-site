@@ -36,9 +36,11 @@ Complete these items before the production site replaces the current website.
 
 ## Email and Vercel
 
-- Create and verify a sending domain in Resend.
-- Add `RESEND_API_KEY`, `QUOTE_FROM_EMAIL`, `QUOTE_TO_EMAIL`, and
-  `NEXT_PUBLIC_SITE_URL` to the Vercel project.
+- Create a Brevo account and verify `BREVO_SENDER_EMAIL` or the Roadsafe
+  sending domain.
+- Create a Brevo transactional API key.
+- Add `BREVO_API_KEY`, `BREVO_SENDER_EMAIL`, `BREVO_SENDER_NAME`,
+  `QUOTE_TO_EMAIL`, and `NEXT_PUBLIC_SITE_URL` to the Vercel project.
 - Keep `QUOTE_TO_EMAIL=nicki@roadsafe.co.za`.
 - Submit test quotes from desktop and mobile and verify:
   - Roadsafe receives the full request.
