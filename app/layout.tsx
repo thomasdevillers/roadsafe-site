@@ -90,9 +90,9 @@ const globalStructuredData = {
       url: SITE_URL,
       logo: {
         "@type": "ImageObject",
-        url: absoluteUrl("/images/roadsafe-logo.png"),
-        width: 388,
-        height: 78
+        url: absoluteUrl("/images/roadsafe-logo-nobg.png"),
+        width: 776,
+        height: 156
       },
       image: absoluteUrl(DEFAULT_OG_IMAGE.url),
       description: DEFAULT_DESCRIPTION,

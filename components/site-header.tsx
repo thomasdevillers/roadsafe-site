@@ -16,10 +16,10 @@ export function SiteHeader() {
       <div className="header-inner">
         <Link className="brand" href="/" aria-label="Roadsafe Traffic home">
           <Image
-            src="/images/roadsafe-logo.png"
+            src="/images/roadsafe-logo-nobg.png"
             alt="Roadsafe Traffic"
-            width={388}
-            height={78}
+            width={776}
+            height={156}
             priority
           />
         </Link>

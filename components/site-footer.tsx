@@ -15,10 +15,10 @@ export function SiteFooter() {
       <div className="container footer-main">
         <div className="footer-brand">
           <Image
-            src="/images/roadsafe-logo.png"
+            src="/images/roadsafe-logo-nobg.png"
             alt="Roadsafe Traffic"
-            width={388}
-            height={78}
+            width={776}
+            height={156}
           />
           <p>
             Reliable road safety equipment, delivered and supported across South Africa.
