@@ -1,14 +1,14 @@
-import type { Metadata } from "next";
 import { Clock3, Mail, Phone } from "lucide-react";
 import { QuoteForm } from "@/components/quote-form";
 import { contact } from "@/lib/site-data";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Request a Quote",
+export const metadata = createPageMetadata({
+  title: "Request a Road Safety Equipment Quote",
   description:
-    "Request a same-business-day rental or purchase quote for Roadsafe Traffic equipment anywhere in South Africa.",
-  alternates: { canonical: "/request-a-quote" }
-};
+    "Request a same-business-day quote for road safety equipment rental or purchase, with delivery and support anywhere in South Africa.",
+  path: "/request-a-quote"
+});
 
 export default async function RequestQuotePage({
   searchParams

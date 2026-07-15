@@ -1,8 +1,8 @@
 import type { MetadataRoute } from "next";
 import { categories, products } from "@/lib/site-data";
+import { SITE_URL } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = process.env.NEXT_PUBLIC_SITE_URL || "https://www.roadsafe.co.za";
   const staticPaths = [
     "",
     "/products",
@@ -11,9 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/resources",
     "/about",
     "/contact",
-    "/request-a-quote",
-    "/privacy-policy",
-    "/terms"
+    "/request-a-quote"
   ];
   const productPaths = new Set([
     ...categories.map((category) => `/products/${category.path}`),
@@ -21,9 +19,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ]);
 
   return [...staticPaths, ...productPaths].map((path) => ({
-    url: `${base}${path}`,
-    lastModified: new Date(),
-    changeFrequency: path === "" ? "weekly" : "monthly",
-    priority: path === "" ? 1 : path.startsWith("/products") ? 0.8 : 0.6
+    url: `${SITE_URL}${path}`,
+    lastModified: new Date("2026-07-15"),
+    changeFrequency:
+      path === "" || path === "/products" ? "weekly" : "monthly",
+    priority:
+      path === ""
+        ? 1
+        : path === "/products" || path === "/rentals"
+          ? 0.9
+          : path.startsWith("/products")
+            ? 0.8
+            : path === "/request-a-quote" || path === "/contact"
+              ? 0.7
+              : 0.6
   }));
 }

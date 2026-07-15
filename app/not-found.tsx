@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
+export const metadata = {
+  title: "Page Not Found",
+  robots: { index: false, follow: false }
+};
+
 export default function NotFound() {
   return (
     <section className="confirmation-page">

@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, Download, FileText } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { CtaBand } from "@/components/cta-band";
 import { products, productHref } from "@/lib/site-data";
 import { SectionHeading } from "@/components/ui";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Equipment Resources & Specifications",
   description:
-    "Access Roadsafe Traffic equipment specifications and product information without registration.",
-  alternates: { canonical: "/resources" }
-};
+    "Access Roadsafe Traffic product details and road safety equipment specifications for project planning and procurement without registration.",
+  path: "/resources"
+});
 
 export default function ResourcesPage() {
   return (
@@ -22,6 +22,7 @@ export default function ResourcesPage() {
         image="/images/hero-roadworks.jpg"
         imageAlt="Road construction crew working on newly laid asphalt at sunset"
         eyebrow="Free equipment resources"
+        currentHref="/resources"
       />
       <section className="section section--white">
         <div className="container">

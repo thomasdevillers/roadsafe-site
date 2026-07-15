@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
 import { LegalPage } from "@/components/legal-page";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Privacy Policy",
-  description: "Draft privacy policy for Roadsafe Traffic.",
-  robots: { index: false, follow: true }
-};
+  description: "How Roadsafe Traffic handles information submitted through this website.",
+  path: "/privacy-policy",
+  noIndex: true
+});
 
 export default function PrivacyPolicyPage() {
   return (

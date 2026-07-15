@@ -7,6 +7,8 @@ import { PageHero } from "@/components/page-hero";
 import { ProductCard, SectionHeading } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
 import { CtaBand } from "@/components/cta-band";
+import { StructuredData } from "@/components/structured-data";
+import { absoluteUrl } from "@/lib/seo";
 
 export function CategoryDetail({ category }: { category: ProductCategory }) {
   const categoryProducts = productsForCategory(category);
@@ -16,6 +18,25 @@ export function CategoryDetail({ category }: { category: ProductCategory }) {
 
   return (
     <>
+      <StructuredData
+        data={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: category.name,
+          description: category.description,
+          url: absoluteUrl(`/products/${category.path}`),
+          mainEntity: {
+            "@type": "ItemList",
+            numberOfItems: categoryProducts.length,
+            itemListElement: categoryProducts.map((product, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              name: product.name,
+              url: absoluteUrl(`/products/${product.path}`)
+            }))
+          }
+        }}
+      />
       <PageHero
         title={category.name}
         description={category.description}
@@ -23,6 +44,7 @@ export function CategoryDetail({ category }: { category: ProductCategory }) {
         imageAlt={category.imageAlt}
         eyebrow={category.kicker}
         parent={{ label: "Products", href: "/products" }}
+        currentHref={`/products/${category.path}`}
       />
       <section className="section section--light">
         <div className="container">

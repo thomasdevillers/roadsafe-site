@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { contact } from "@/lib/site-data";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact",
+export const metadata = createPageMetadata({
+  title: "Contact Roadsafe Traffic",
   description:
-    "Contact Roadsafe Traffic in Gqeberha for road safety equipment rentals and support across South Africa.",
-  alternates: { canonical: "/contact" }
-};
+    "Contact Roadsafe Traffic in Gqeberha for road safety equipment rentals, project quotes and nationwide equipment support across South Africa.",
+  path: "/contact"
+});
 
 export default function ContactPage() {
   const mapQuery = encodeURIComponent(contact.address);
@@ -22,6 +22,7 @@ export default function ContactPage() {
         image="/images/hero-roadworks.jpg"
         imageAlt="Road construction crew working on newly laid asphalt at sunset"
         eyebrow="Contact Roadsafe"
+        currentHref="/contact"
       />
       <section className="section section--white contact-section">
         <div className="container contact-grid">

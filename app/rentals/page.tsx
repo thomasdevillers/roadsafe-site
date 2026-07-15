@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, CalendarDays, ClipboardCheck, MapPinned, PackageCheck, RefreshCcw, Wrench } from "lucide-react";
@@ -6,13 +5,17 @@ import { PageHero } from "@/components/page-hero";
 import { CtaBand } from "@/components/cta-band";
 import { Reveal } from "@/components/reveal";
 import { Eyebrow, SectionHeading } from "@/components/ui";
+import { absoluteUrl, createPageMetadata, SITE_URL } from "@/lib/seo";
+import { StructuredData } from "@/components/structured-data";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Road Safety Equipment Rentals",
   description:
-    "Flexible road safety equipment rentals with nationwide delivery, installation, maintenance and collection.",
-  alternates: { canonical: "/rentals" }
-};
+    "Flexible road safety equipment hire across South Africa with nationwide delivery, on-site installation, maintenance and planned collection.",
+  path: "/rentals",
+  image: "/images/roadsafe-fleet.jpg",
+  imageAlt: "Roadsafe Traffic rental fleet supporting a roadside project"
+});
 
 const inclusions = [
   {
@@ -40,12 +43,27 @@ const inclusions = [
 export default function RentalsPage() {
   return (
     <>
+      <StructuredData
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "@id": `${absoluteUrl("/rentals")}#service`,
+          name: "Road Safety Equipment Rental",
+          description:
+            "Flexible road safety equipment rental with nationwide delivery, installation, maintenance and collection.",
+          url: absoluteUrl("/rentals"),
+          provider: { "@id": `${SITE_URL}/#organization` },
+          areaServed: { "@type": "Country", name: "South Africa" },
+          serviceType: "Road safety and traffic management equipment rental"
+        }}
+      />
       <PageHero
         title="Rental equipment that arrives ready to work."
         description="Choose any rental duration, combine multiple products and let Roadsafe coordinate the deployment from delivery to collection."
         image="/images/roadsafe-fleet.jpg"
         imageAlt="Roadsafe service vehicle deployed beside road safety equipment"
         eyebrow="Flexible rental periods"
+        currentHref="/rentals"
       />
 
       <section className="section section--white">

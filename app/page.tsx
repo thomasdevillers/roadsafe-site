@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight, Check, Clock3, MapPinned, Wrench } from "lucide-react";
@@ -6,13 +5,14 @@ import { getProduct } from "@/lib/site-data";
 import { CtaBand } from "@/components/cta-band";
 import { Reveal } from "@/components/reveal";
 import { Eyebrow, ProductCard, SectionHeading, TextLink } from "@/components/ui";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Informing the Motorist",
+export const metadata = createPageMetadata({
+  title: "Road Safety Equipment Rental South Africa | Roadsafe Traffic",
   description:
-    "Roadsafe Traffic rents reliable VMS boards, traffic control units and road safety equipment with nationwide delivery and support across South Africa.",
-  alternates: { canonical: "/" }
-};
+    "Rent VMS boards, traffic control units, speed radars and solar light towers with nationwide delivery, installation and support from Roadsafe Traffic.",
+  path: "/"
+});
 
 const featuredProducts = [
   getProduct("variable-message-signs"),

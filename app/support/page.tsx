@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, MessageCircle, Phone, Settings, Truck, Wrench } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
@@ -6,13 +5,16 @@ import { CtaBand } from "@/components/cta-band";
 import { contact } from "@/lib/site-data";
 import { Reveal } from "@/components/reveal";
 import { Eyebrow, SectionHeading } from "@/components/ui";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Equipment Support",
+export const metadata = createPageMetadata({
+  title: "Road Safety Equipment Support",
   description:
-    "Roadsafe supports rental equipment with delivery coordination, installation, configuration, maintenance and collection.",
-  alternates: { canonical: "/support" }
-};
+    "Get nationwide Roadsafe rental equipment support, including delivery coordination, installation, setup, maintenance and collection.",
+  path: "/support",
+  image: "/images/field-service.jpg",
+  imageAlt: "Roadsafe equipment support vehicle deployed beside a road"
+});
 
 export default function SupportPage() {
   return (
@@ -23,6 +25,7 @@ export default function SupportPage() {
         image="/images/field-service.jpg"
         imageAlt="Roadsafe support vehicle and equipment deployed beside a road"
         eyebrow="Deployment & maintenance"
+        currentHref="/support"
       />
       <section className="section section--white">
         <div className="container">

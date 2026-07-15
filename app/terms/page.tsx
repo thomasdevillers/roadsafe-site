@@ -1,11 +1,12 @@
-import type { Metadata } from "next";
 import { LegalPage } from "@/components/legal-page";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Terms & Conditions",
-  description: "Draft website terms and conditions for Roadsafe Traffic.",
-  robots: { index: false, follow: true }
-};
+  description: "Terms governing use of the Roadsafe Traffic website and its product information.",
+  path: "/terms",
+  noIndex: true
+});
 
 export default function TermsPage() {
   return (

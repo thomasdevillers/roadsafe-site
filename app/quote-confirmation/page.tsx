@@ -1,10 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Check, MessageCircle, Phone } from "lucide-react";
 import { contact } from "@/lib/site-data";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Quote Request Received",
+export const metadata = {
+  ...createPageMetadata({
+    title: "Quote Request Received",
+    description: "Confirmation that Roadsafe Traffic received your equipment quote request.",
+    path: "/quote-confirmation",
+    noIndex: true
+  }),
   robots: { index: false, follow: false }
 };
 

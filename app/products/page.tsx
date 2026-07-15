@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
@@ -7,25 +6,48 @@ import { PageHero } from "@/components/page-hero";
 import { Eyebrow, SectionHeading } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
 import { CtaBand } from "@/components/cta-band";
+import { absoluteUrl, createPageMetadata } from "@/lib/seo";
+import { StructuredData } from "@/components/structured-data";
 
-export const metadata: Metadata = {
-  title: "Road Safety Equipment",
+export const metadata = createPageMetadata({
+  title: "Road Safety Equipment for Hire & Purchase",
   description:
-    "Explore Roadsafe Traffic's VMS boards, traffic control units, speed radars, light towers and purchase-only warning equipment.",
-  alternates: { canonical: "/products" }
-};
+    "Explore VMS boards, traffic control units, speed radar signs and solar light towers for hire, plus road warning equipment for purchase in South Africa.",
+  path: "/products"
+});
 
 export default function ProductsPage() {
   const featured = categories.flatMap(productsForCategory).filter((product) => product.flagship);
 
   return (
     <>
+      <StructuredData
+        data={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "Road Safety Equipment",
+          description:
+            "Roadsafe Traffic equipment for road communication, control, lighting and warning.",
+          url: absoluteUrl("/products"),
+          mainEntity: {
+            "@type": "ItemList",
+            numberOfItems: categories.length,
+            itemListElement: categories.map((category, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              name: category.name,
+              url: absoluteUrl(`/products/${category.path}`)
+            }))
+          }
+        }}
+      />
       <PageHero
         title="Equipment built to keep roads moving."
         description="Traffic communication, control, lighting and warning systems, supplied and supported nationwide."
         image="/images/hero-roadworks.jpg"
         imageAlt="Road construction crew working on newly laid asphalt at sunset"
         eyebrow="Roadsafe equipment"
+        currentHref="/products"
       />
       <section className="section section--white">
         <div className="container">

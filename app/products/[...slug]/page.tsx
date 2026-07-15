@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { CategoryDetail } from "@/components/category-detail";
 import { ProductDetail } from "@/components/product-detail";
 import { categories, getCategory, getProduct, products } from "@/lib/site-data";
+import { createPageMetadata } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ slug: string[] }>;
@@ -23,23 +24,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const category = getCategory(path);
   const entry = product || category;
 
-  if (!entry) return {};
+  if (!entry) return { robots: { index: false, follow: false } };
 
   const description =
     "tagline" in entry
       ? `${entry.tagline} Available to rent with nationwide delivery and Roadsafe support.`
       : entry.description;
 
-  return {
+  return createPageMetadata({
     title: entry.name,
     description,
-    alternates: { canonical: `/products/${path}` },
-    openGraph: {
-      title: `${entry.name} | Roadsafe Traffic`,
-      description,
-      images: [entry.image]
-    }
-  };
+    path: `/products/${path}`,
+    image: entry.image,
+    imageAlt: entry.imageAlt
+  });
 }
 
 export default async function ProductRoute({ params }: Props) {

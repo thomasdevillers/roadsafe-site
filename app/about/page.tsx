@@ -1,17 +1,19 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import { Gauge, Map, ShieldCheck, Wrench } from "lucide-react";
 import { PageHero } from "@/components/page-hero";
 import { CtaBand } from "@/components/cta-band";
 import { Reveal } from "@/components/reveal";
 import { Eyebrow, SectionHeading } from "@/components/ui";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "About Roadsafe Traffic",
+export const metadata = createPageMetadata({
+  title: "About Us",
   description:
-    "Roadsafe Traffic supplies reliable road safety equipment rentals to construction teams across South Africa.",
-  alternates: { canonical: "/about" }
-};
+    "Learn how Roadsafe Traffic supplies and supports reliable road safety equipment for roadworks and construction projects across South Africa.",
+  path: "/about",
+  image: "/images/roadsafe-fleet.jpg",
+  imageAlt: "Roadsafe Traffic service vehicle supporting roadside equipment"
+});
 
 export default function AboutPage() {
   return (
@@ -22,6 +24,7 @@ export default function AboutPage() {
         image="/images/roadsafe-fleet.jpg"
         imageAlt="Roadsafe Traffic vehicle supporting roadside equipment"
         eyebrow="Roadsafe Traffic"
+        currentHref="/about"
       />
       <section className="section section--white">
         <div className="container split">

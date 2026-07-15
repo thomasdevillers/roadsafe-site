@@ -39,7 +39,8 @@ Complete these items before the production site replaces the current website.
   sending domain.
 - Create a Brevo transactional API key.
 - Add `BREVO_API_KEY`, `BREVO_SENDER_EMAIL`, `BREVO_SENDER_NAME`,
-  `QUOTE_TO_EMAIL`, and `NEXT_PUBLIC_SITE_URL` to the Vercel project.
+  `QUOTE_TO_EMAIL`, `NEXT_PUBLIC_SITE_URL`, and
+  `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` to the Vercel project.
 - Keep `QUOTE_TO_EMAIL=nicki@roadsafe.co.za`.
 - Submit test quotes from desktop and mobile and verify:
   - Roadsafe receives the full request.
@@ -65,7 +66,13 @@ Complete these items before the production site replaces the current website.
 ## Migration
 
 - Connect the production domain to Vercel.
+- Set `www.roadsafe.co.za` as the primary domain and permanently redirect all
+  alternate HTTP/HTTPS and non-www variants to it.
 - Verify all legacy redirects in `next.config.ts`.
-- Submit `/sitemap.xml` in Google Search Console.
+- Verify the domain in Google Search Console, deploy its verification token,
+  and submit `/sitemap.xml`.
+- Add the site to Bing Webmaster Tools and submit `/sitemap.xml`.
+- Request indexing for the home page, products page and priority product pages
+  after the production deployment is confirmed.
 - Retire or block the old WordPress author archive at `/author/admin/`.
 - Run final accessibility, performance and browser testing against production.

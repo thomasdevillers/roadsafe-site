@@ -6,6 +6,8 @@ import { products } from "@/lib/site-data";
 import { Eyebrow, ProductCard, SectionHeading, TextLink } from "@/components/ui";
 import { Reveal } from "@/components/reveal";
 import { CtaBand } from "@/components/cta-band";
+import { StructuredData } from "@/components/structured-data";
+import { absoluteUrl, SITE_URL } from "@/lib/seo";
 
 export function ProductDetail({ product }: { product: Product }) {
   const isPurchase = product.availability === "purchase";
@@ -23,9 +25,60 @@ export function ProductDetail({ product }: { product: Product }) {
         !preferredRelated.some((preferred) => preferred.path === item.path)
     )
   ].slice(0, 3);
+  const productUrl = `/products/${product.path}`;
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Products",
+          item: absoluteUrl("/products")
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: product.categoryLabel,
+          item: absoluteUrl(product.categoryPath)
+        },
+        {
+          "@type": "ListItem",
+          position: 4,
+          name: product.name,
+          item: absoluteUrl(productUrl)
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "@id": `${absoluteUrl(productUrl)}#product`,
+      name: product.name,
+      alternateName: product.shortName,
+      description: product.description,
+      url: absoluteUrl(productUrl),
+      image: [absoluteUrl(product.image)],
+      sku: product.slug,
+      category: product.categoryLabel,
+      brand: { "@type": "Brand", name: "Roadsafe Traffic" },
+      audience: {
+        "@type": "BusinessAudience",
+        audienceType: "Road construction and traffic management teams"
+      },
+      additionalProperty: product.specs.map((spec) => ({
+        "@type": "PropertyValue",
+        name: spec.label,
+        value: spec.value
+      }))
+    }
+  ];
 
   return (
     <>
+      <StructuredData data={structuredData} />
       <section className="product-hero">
         <div className="container product-hero__grid">
           <div className="product-hero__copy">
