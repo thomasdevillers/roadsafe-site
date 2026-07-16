@@ -12,6 +12,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { FloatingActions } from "@/components/floating-actions";
 import { StructuredData } from "@/components/structured-data";
 import { GoogleAnalytics } from "@/components/google-analytics";
+import { ContactTracking } from "@/components/contact-tracking";
 import { contact } from "@/lib/site-data";
 import {
   absoluteUrl,
@@ -138,6 +139,7 @@ export default function RootLayout({
     <html lang="en" data-scroll-behavior="smooth">
       <body>
         <GoogleAnalytics />
+        <ContactTracking />
         <StructuredData data={globalStructuredData} />
         <a className="skip-link" href="#main-content">
           Skip to content
