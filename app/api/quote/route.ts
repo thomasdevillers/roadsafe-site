@@ -101,15 +101,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "Invalid request." }, { status: 400 });
   }
 
-  const required = [
-    payload.rentalPeriod,
-    payload.requiredDate,
-    payload.projectLocation,
-    payload.company,
-    payload.contactName,
-    payload.email,
-    payload.phone
-  ];
+  const required = [payload.contactName, payload.email];
   if (
     !payload.products?.length ||
     required.some((value) => !String(value || "").trim()) ||
@@ -132,15 +124,15 @@ export async function POST(request: Request) {
     <h2>Equipment</h2>
     <ul>${productsHtml}</ul>
     <h2>Project</h2>
-    ${payload.rentalPeriod === "Purchase only" ? "" : `<p><strong>Rental period:</strong> ${escapeHtml(payload.rentalPeriod)}</p>`}
-    <p><strong>Required date:</strong> ${escapeHtml(payload.requiredDate)}</p>
-    <p><strong>Location:</strong> ${escapeHtml(payload.projectLocation)}</p>
+    ${payload.rentalPeriod === "Purchase only" ? "" : `<p><strong>Rental period:</strong> ${escapeHtml(payload.rentalPeriod || "Not sure yet")}</p>`}
+    <p><strong>Required date:</strong> ${escapeHtml(payload.requiredDate || "Not provided")}</p>
+    <p><strong>Location:</strong> ${escapeHtml(payload.projectLocation || "Not provided")}</p>
     <p><strong>Additional requirements:</strong><br>${escapeHtml(payload.notes || "None provided").replaceAll("\n", "<br>")}</p>
     <h2>Contact</h2>
-    <p><strong>Company:</strong> ${escapeHtml(payload.company)}</p>
+    <p><strong>Company:</strong> ${escapeHtml(payload.company || "Not provided")}</p>
     <p><strong>Name:</strong> ${escapeHtml(payload.contactName)}</p>
     <p><strong>Email:</strong> ${escapeHtml(payload.email)}</p>
-    <p><strong>Phone:</strong> ${escapeHtml(payload.phone)}</p>
+    <p><strong>Phone:</strong> ${escapeHtml(payload.phone || "Not provided")}</p>
   `;
 
   const apiKey = process.env.BREVO_API_KEY;
@@ -170,7 +162,7 @@ export async function POST(request: Request) {
         sender,
         to: { email: quoteRecipient, name: "Roadsafe Traffic" },
         replyTo: { email: customerEmail, name: customerName },
-        subject: `Quote request ${reference} — ${payload.company}`,
+        subject: `Quote request ${reference} — ${payload.company || payload.contactName}`,
         htmlContent: `<h1>New Roadsafe quote request</h1><p>Reference: <strong>${reference}</strong></p>${detailsHtml}`
       }),
       sendBrevoEmail({

@@ -25,8 +25,8 @@ export default async function RequestQuotePage({
             <p className="eyebrow eyebrow--light">Equipment quote</p>
             <h1>Build the requirement.</h1>
             <p>
-              Add rental equipment, purchase products or both. Tell us where and
-              when they are needed, and Roadsafe will respond the same business day.
+              Select rental equipment, purchase products or both. Share only the
+              project details you know, and Roadsafe will respond the same business day.
             </p>
           </div>
           <div className="quote-hero__facts">

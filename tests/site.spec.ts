@@ -139,8 +139,9 @@ test("purchase-only quotes omit rental period and mixed quotes restore it", asyn
   await page.getByRole("button", { name: "Add another product" }).click();
   await page.getByLabel("Product 2", { exact: true }).selectOption("traffic-control-units");
   await expect(page.getByLabel("Rental period")).toHaveCount(1);
-  await page.getByRole("button", { name: "Continue" }).click();
   await expect(page.getByText("Rental items only")).toBeVisible();
+  await page.getByRole("button", { name: "Continue" }).click();
+  await expect(page.getByRole("heading", { name: "Where should we respond?" })).toBeVisible();
 });
 
 test("replacement hero and product imagery is served", async ({ page }) => {
@@ -197,15 +198,21 @@ test("quote supports single-page mode and development submission", async ({ page
   await expect(page.getByRole("heading", { name: "Roadsafe has the requirement." })).toBeVisible();
 });
 
-test("guided quote advances through all three stages", async ({ page }) => {
+test("quote can be submitted with only essential contact details", async ({ page }) => {
+  await page.goto("/request-a-quote?product=traffic-control-units");
+  await page.getByRole("button", { name: "Single page" }).click();
+
+  await page.getByLabel("Contact name").fill("Quick Quote Test");
+  await page.getByLabel("Email").fill("quick@example.com");
+  await page.getByRole("button", { name: "Submit quote request" }).click();
+
+  await expect(page).toHaveURL(/\/quote-confirmation\?ref=RST-/);
+});
+
+test("guided quote reaches contact details in two stages", async ({ page }) => {
   await page.goto("/request-a-quote");
   await page.locator("select").first().selectOption("traffic-control-units");
-  await page.getByRole("button", { name: "Continue" }).click();
   await expect(page.getByRole("heading", { name: "Define the project." })).toBeVisible();
-
-  await page.getByLabel("Rental period").selectOption({ label: "Not sure yet" });
-  await page.getByLabel("Required date").fill("2026-12-15");
-  await page.getByLabel("Project location").fill("Cape Town, Western Cape");
   await page.getByRole("button", { name: "Continue" }).click();
   await expect(page.getByRole("heading", { name: "Where should we respond?" })).toBeVisible();
 });

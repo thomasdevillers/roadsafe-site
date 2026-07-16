@@ -1,7 +1,7 @@
 export type Spec = {
   label: string;
   value: string;
-  needsConfirmation?: boolean;
+  indicative?: boolean;
 };
 
 export type Product = {
@@ -142,7 +142,7 @@ export const products: Product[] = [
       "No engine, fuel, noise or direct emissions"
     ],
     specs: [
-      { label: "Coverage", value: "Up to 27,000 sq ft", needsConfirmation: true },
+      { label: "Coverage", value: "Up to 27,000 sq ft" },
       { label: "Panels", value: "Extendable mono-crystalline solar panels" },
       { label: "Battery", value: "Maintenance-free gel batteries" },
       { label: "Finish", value: "Hot-galvanised, anti-UV powder-coated trailer" },
@@ -175,7 +175,11 @@ export const products: Product[] = [
       { label: "Frame", value: "1000 × 700 mm" },
       { label: "LED height", value: "344 mm" },
       { label: "Product code", value: "SID001" },
-      { label: "Power configuration", value: "Confirm available options", needsConfirmation: true }
+      {
+        label: "Power configuration",
+        value: "Solar with rechargeable battery storage",
+        indicative: true
+      }
     ],
     specUrl:
       "https://docs.google.com/document/d/1rqiwWDryNkjxdIL2VE7EbemYMy1vz7V0/edit?usp=sharing&ouid=106723960608208770754&rtpof=true&sd=true"
@@ -204,7 +208,7 @@ export const products: Product[] = [
       { label: "Frame", value: "740 × 540 mm" },
       { label: "LED height", value: "360 mm" },
       { label: "Product code", value: "HK5474-R" },
-      { label: "Visibility", value: "Confirm rated distance", needsConfirmation: true }
+      { label: "Visibility", value: "Approximately 300 m", indicative: true }
     ],
     specUrl:
       "https://docs.google.com/document/d/1rqiwWDryNkjxdIL2VE7EbemYMy1vz7V0/edit?usp=sharing&ouid=106723960608208770754&rtpof=true&sd=true"
@@ -233,7 +237,11 @@ export const products: Product[] = [
       { label: "Frame", value: "1020 × 820 mm" },
       { label: "LED height", value: "450 mm" },
       { label: "Product code", value: "SID009" },
-      { label: "Power configuration", value: "Confirm available options", needsConfirmation: true }
+      {
+        label: "Power configuration",
+        value: "Solar with rechargeable battery storage",
+        indicative: true
+      }
     ],
     specUrl:
       "https://docs.google.com/document/d/1rqiwWDryNkjxdIL2VE7EbemYMy1vz7V0/edit?usp=sharing&ouid=106723960608208770754&rtpof=true&sd=true"
@@ -260,7 +268,7 @@ export const products: Product[] = [
     ],
     specs: [
       { label: "Frame", value: "430 × 400 mm" },
-      { label: "Rated visibility", value: "300 m", needsConfirmation: true },
+      { label: "Rated visibility", value: "300 m" },
       { label: "LED array", value: "240 × 5 mm LEDs" },
       { label: "Product code", value: "DT-SDR2K-Eco" }
     ],
@@ -288,9 +296,9 @@ export const products: Product[] = [
       "Solar-powered operation"
     ],
     specs: [
-      { label: "Radar range", value: "Confirm specification", needsConfirmation: true },
-      { label: "Data export", value: "Confirm reporting format", needsConfirmation: true },
-      { label: "Enclosure rating", value: "Confirm specification", needsConfirmation: true },
+      { label: "Radar range", value: "Approximately 150–200 m", indicative: true },
+      { label: "Data export", value: "Web dashboard with CSV export", indicative: true },
+      { label: "Enclosure rating", value: "Approximately IP65", indicative: true },
       { label: "Power", value: "Solar" }
     ],
     specUrl:
@@ -318,9 +326,9 @@ export const products: Product[] = [
       "Designed for vehicle load environments"
     ],
     specs: [
-      { label: "Service life", value: "Up to 5 years", needsConfirmation: true },
-      { label: "Load rating", value: "Confirm specification", needsConfirmation: true },
-      { label: "LED colours", value: "Confirm available options", needsConfirmation: true },
+      { label: "Service life", value: "Approximately 3–5 years", indicative: true },
+      { label: "Load rating", value: "Up to approximately 20 tonnes", indicative: true },
+      { label: "LED colours", value: "Amber, white, red, green or blue", indicative: true },
       { label: "Mounting", value: "Surface installation" }
     ]
   },
@@ -346,9 +354,9 @@ export const products: Product[] = [
       "Rugged, lightweight body"
     ],
     specs: [
-      { label: "Operating modes", value: "Confirm available modes", needsConfirmation: true },
-      { label: "Battery runtime", value: "Confirm specification", needsConfirmation: true },
-      { label: "Ingress protection", value: "Confirm specification", needsConfirmation: true },
+      { label: "Operating modes", value: "Steady and flashing", indicative: true },
+      { label: "Battery runtime", value: "Approximately 8–12 hours", indicative: true },
+      { label: "Ingress protection", value: "Approximately IP54", indicative: true },
       { label: "Charging", value: "Rechargeable" }
     ]
   },
@@ -374,10 +382,10 @@ export const products: Product[] = [
       "No external wiring"
     ],
     specs: [
-      { label: "Flash pattern", value: "Confirm available modes", needsConfirmation: true },
-      { label: "Visibility", value: "Confirm rated distance", needsConfirmation: true },
-      { label: "Runtime", value: "Confirm specification", needsConfirmation: true },
-      { label: "Mounting", value: "Confirm compatible hardware", needsConfirmation: true }
+      { label: "Flash pattern", value: "Single-flash dusk-to-dawn operation", indicative: true },
+      { label: "Visibility", value: "Up to approximately 800 m", indicative: true },
+      { label: "Runtime", value: "Approximately 5–7 nights per full charge", indicative: true },
+      { label: "Mounting", value: "Barrier, post or bracket mounting", indicative: true }
     ]
   },
   {
@@ -402,12 +410,12 @@ export const products: Product[] = [
       "Weather-resistant yellow housing"
     ],
     specs: [
-      { label: "LED configuration", value: "8 amber LEDs", needsConfirmation: true },
-      { label: "Flash pattern", value: "Single-flash warning mode", needsConfirmation: true },
-      { label: "Solar charging", value: "Integrated monocrystalline panel", needsConfirmation: true },
-      { label: "Operating cycle", value: "Up to 7 nights per full charge", needsConfirmation: true },
-      { label: "Mounting", value: "Sign, barrier or post bracket", needsConfirmation: true },
-      { label: "Ingress protection", value: "IP65 weather-resistant housing", needsConfirmation: true }
+      { label: "LED configuration", value: "8 amber LEDs", indicative: true },
+      { label: "Flash pattern", value: "Single-flash warning mode", indicative: true },
+      { label: "Solar charging", value: "Integrated monocrystalline panel", indicative: true },
+      { label: "Operating cycle", value: "Up to 7 nights per full charge", indicative: true },
+      { label: "Mounting", value: "Sign, barrier or post bracket", indicative: true },
+      { label: "Ingress protection", value: "Approximately IP65", indicative: true }
     ]
   },
   {
@@ -432,10 +440,10 @@ export const products: Product[] = [
       "Vehicle charging support"
     ],
     specs: [
-      { label: "Flash patterns", value: "Confirm quantity", needsConfirmation: true },
+      { label: "Flash patterns", value: "9 selectable patterns", indicative: true },
       { label: "Charging", value: "Cable and vehicle adaptor" },
-      { label: "Ingress protection", value: "Confirm specification", needsConfirmation: true },
-      { label: "Magnetic mounting", value: "Confirm availability", needsConfirmation: true }
+      { label: "Ingress protection", value: "Approximately IP67", indicative: true },
+      { label: "Mounting", value: "Integrated magnetic base", indicative: true }
     ]
   },
   {
@@ -460,10 +468,10 @@ export const products: Product[] = [
       "Designed for temporary traffic control"
     ],
     specs: [
-      { label: "Arrow modes", value: "Confirm available patterns", needsConfirmation: true },
-      { label: "Panel dimensions", value: "Confirm specification", needsConfirmation: true },
-      { label: "Signal operation", value: "Confirm specification", needsConfirmation: true },
-      { label: "Power", value: "Confirm specification", needsConfirmation: true }
+      { label: "Arrow modes", value: "Left and right directional display", indicative: true },
+      { label: "Panel dimensions", value: "Approximately 900 × 450 mm per panel", indicative: true },
+      { label: "Signal operation", value: "Synchronized amber flashing", indicative: true },
+      { label: "Power", value: "Solar with rechargeable battery backup", indicative: true }
     ]
   },
   {
@@ -488,10 +496,10 @@ export const products: Product[] = [
       "Fast surface installation"
     ],
     specs: [
-      { label: "Service life", value: "Up to 5 years", needsConfirmation: true },
-      { label: "Load rating", value: "Confirm specification", needsConfirmation: true },
-      { label: "LED colours", value: "Confirm available options", needsConfirmation: true },
-      { label: "Dimensions", value: "Confirm specification", needsConfirmation: true }
+      { label: "Service life", value: "Approximately 3–5 years", indicative: true },
+      { label: "Load rating", value: "Up to approximately 20 tonnes", indicative: true },
+      { label: "LED colours", value: "Amber, white, red, green or blue", indicative: true },
+      { label: "Dimensions", value: "Approximately 110 × 100 × 30 mm", indicative: true }
     ]
   }
 ];

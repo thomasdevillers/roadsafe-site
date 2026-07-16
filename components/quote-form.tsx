@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, Check, LoaderCircle, Minus, Plus, Send, Trash2 } from "lucide-react";
 import { products } from "@/lib/site-data";
@@ -11,7 +12,7 @@ type ProductLine = {
 
 type FormMode = "guided" | "single";
 
-const steps = ["Equipment", "Project", "Contact"];
+const steps = ["Requirement", "Contact"];
 
 export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
   const initialSelection = useMemo(
@@ -124,8 +125,8 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
     <div className="quote-form-shell">
       <div className="quote-mode">
         <div>
-          <p>Form layout</p>
-          <span>Use the guided steps or view everything together.</span>
+          <p>Quick quote</p>
+          <span>Choose equipment, then add only the details you know.</span>
         </div>
         <div className="segmented-control" aria-label="Quote form layout">
           <button
@@ -265,11 +266,11 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
 
         <section
           className="form-panel"
-          data-step="1"
-          hidden={mode === "guided" && step !== 1}
+          data-step="0"
+          hidden={mode === "guided" && step !== 0}
         >
           <div className="form-panel__heading">
-            <span>02</span>
+            <span>Optional</span>
             <div>
               <h2>
                 {hasPurchase && !hasRental
@@ -278,7 +279,7 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
                     ? "Define the project and order."
                     : "Define the project."}
               </h2>
-              <p>Approximate details are enough to begin.</p>
+              <p>Everything in this section is optional. Estimates are enough.</p>
             </div>
           </div>
           <div className="form-grid">
@@ -288,29 +289,25 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
                   Rental period
                   {hasPurchase && <small>Rental items only</small>}
                 </span>
-                <select name="rentalPeriod" required defaultValue="">
-                  <option value="" disabled>
-                    Select a duration
-                  </option>
+                <select name="rentalPeriod" defaultValue="Not sure yet">
+                  <option>Not sure yet</option>
                   <option>Less than 1 week</option>
                   <option>1–4 weeks</option>
                   <option>1–3 months</option>
                   <option>More than 3 months</option>
-                  <option>Not sure yet</option>
                 </select>
               </label>
             )}
             <label>
-              <span>Required date</span>
-              <input name="requiredDate" type="date" required />
+              <span>Required date <small>Optional</small></span>
+              <input name="requiredDate" type="date" />
             </label>
             <label className="field-wide">
-              <span>Project location</span>
+              <span>Project location <small>Optional</small></span>
               <input
                 name="projectLocation"
                 type="text"
                 placeholder="Town, province or site address"
-                required
               />
             </label>
             <label className="field-wide">
@@ -326,20 +323,20 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
 
         <section
           className="form-panel"
-          data-step="2"
-          hidden={mode === "guided" && step !== 2}
+          data-step="1"
+          hidden={mode === "guided" && step !== 1}
         >
           <div className="form-panel__heading">
-            <span>03</span>
+            <span>02</span>
             <div>
               <h2>Where should we respond?</h2>
-              <p>Quote requests are reviewed the same business day.</p>
+              <p>Only your name and email are required.</p>
             </div>
           </div>
           <div className="form-grid">
             <label>
-              <span>Company</span>
-              <input name="company" type="text" autoComplete="organization" required />
+              <span>Company <small>Optional</small></span>
+              <input name="company" type="text" autoComplete="organization" />
             </label>
             <label>
               <span>Contact name</span>
@@ -350,8 +347,8 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
               <input name="email" type="email" autoComplete="email" required />
             </label>
             <label>
-              <span>Phone</span>
-              <input name="phone" type="tel" autoComplete="tel" required />
+              <span>Phone <small>Optional</small></span>
+              <input name="phone" type="tel" autoComplete="tel" />
             </label>
           </div>
         </section>
@@ -392,6 +389,12 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
             </button>
           )}
         </div>
+        {(mode === "single" || step === steps.length - 1) && (
+          <p className="quote-assurance">
+            No account needed. We use your details only to respond to this request. See our{" "}
+            <Link href="/privacy-policy">privacy policy</Link>.
+          </p>
+        )}
         <div className="form-status" aria-live="polite">
           {status === "error" && <p>{error}</p>}
         </div>

@@ -18,7 +18,7 @@ export default function ResourcesPage() {
     <>
       <PageHero
         title="Specifications, without a gate."
-        description="Review product information freely. Current external files remain available while Roadsafe prepares a complete branded resource library."
+        description="Review product information freely. Indicative values support early planning, with final specifications confirmed for the supplied unit when ordering."
         image="/images/hero-roadworks.jpg"
         imageAlt="Road construction crew working on newly laid asphalt at sunset"
         eyebrow="Free equipment resources"
@@ -29,7 +29,7 @@ export default function ResourcesPage() {
           <SectionHeading
             eyebrow="Equipment library"
             title="Technical information for planning and procurement."
-            copy="Where a verified specification document is not yet available, the product page clearly identifies details awaiting confirmation."
+            copy="Where a manufacturer specification is not available, the product page clearly labels conservative planning estimates as indicative."
           />
           <div className="resource-list">
             {products.map((product, index) => (

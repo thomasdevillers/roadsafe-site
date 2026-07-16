@@ -10,13 +10,12 @@ Complete these items before the production site replaces the current website.
   - Speed Sentinel Advanced
   - Speed Sentinel Essential
   - FlashGuard Dummy Camera
-- Verify every specification marked `needsConfirmation` in `lib/site-data.ts`.
+- Replace indicative planning estimates with manufacturer specifications if they become available.
 - Confirm whether the Advanced, Compact, Classic and Essential models should
   share one specification document. They currently point to the same Google
   document.
-- Confirm the Solar Light Tower coverage claim of up to 27,000 square feet.
-- Confirm the Double Arrow Light specifications and approved product image.
-- Confirm that all six Warning Lights products remain purchase-only in the
+- Confirm the approved Double Arrow Light product image.
+- Confirm that all seven Warning Lights products remain purchase-only in the
   final commercial catalogue.
 - Replace low-resolution legacy product images with approved high-resolution
   photography where available.

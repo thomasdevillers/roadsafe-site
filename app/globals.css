@@ -1691,7 +1691,7 @@ h3 {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   border-bottom: 1px solid var(--line);
   list-style: none;
 }
@@ -1937,6 +1937,19 @@ h3 {
 .form-actions button:disabled {
   opacity: 0.62;
   cursor: wait;
+}
+
+.quote-assurance {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: right;
+}
+
+.quote-assurance a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .form-status {

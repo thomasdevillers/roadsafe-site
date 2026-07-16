@@ -71,7 +71,7 @@ export function ProductDetail({ product }: { product: Product }) {
       additionalProperty: product.specs.map((spec) => ({
         "@type": "PropertyValue",
         name: spec.label,
-        value: spec.value
+        value: spec.indicative ? `${spec.value} (indicative)` : spec.value
       }))
     }
   ];
@@ -189,7 +189,7 @@ export function ProductDetail({ product }: { product: Product }) {
               light
               eyebrow="Technical profile"
               title="The details your project team needs."
-              copy="Specifications below are based on the current Roadsafe catalogue. Items marked for confirmation are tracked in the project TODO."
+              copy="Specifications are based on the current Roadsafe catalogue. Values marked as indicative are planning estimates and should be confirmed for the supplied unit when ordering."
             />
           </Reveal>
           <div className="spec-grid">
@@ -197,7 +197,7 @@ export function ProductDetail({ product }: { product: Product }) {
               <div className="spec-item" key={spec.label}>
                 <p>{spec.label}</p>
                 <strong>{spec.value}</strong>
-                {spec.needsConfirmation && <span>Pending final verification</span>}
+                {spec.indicative && <span>Indicative — confirm when ordering</span>}
               </div>
             ))}
           </div>
