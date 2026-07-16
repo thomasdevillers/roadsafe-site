@@ -3,14 +3,26 @@ import Link from "next/link";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { contact, navigation } from "@/lib/site-data";
 
+const marqueeItems = [
+  "INFORMING THE MOTORIST",
+  "RENTAL READY",
+  "NATIONWIDE DELIVERY",
+  "INFORMING THE MOTORIST"
+];
+
 export function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="footer-marquee" aria-hidden="true">
-        <span>INFORMING THE MOTORIST</span>
-        <span>RENTAL READY</span>
-        <span>NATIONWIDE DELIVERY</span>
-        <span>INFORMING THE MOTORIST</span>
+        <div className="footer-marquee__track">
+          {[0, 1].map((group) => (
+            <div className="footer-marquee__group" key={group}>
+              {marqueeItems.map((item, index) => (
+                <span key={`${group}-${index}`}>{item}</span>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
       <div className="container footer-main">
         <div className="footer-brand">

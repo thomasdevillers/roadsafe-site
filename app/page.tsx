@@ -1,10 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight, Check, Clock3, MapPinned, Wrench } from "lucide-react";
-import { getProduct } from "@/lib/site-data";
 import { CtaBand } from "@/components/cta-band";
 import { Reveal } from "@/components/reveal";
-import { Eyebrow, ProductCard, SectionHeading, TextLink } from "@/components/ui";
+import { Eyebrow, SectionHeading, TextLink } from "@/components/ui";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
@@ -14,14 +13,70 @@ export const metadata = createPageMetadata({
   path: "/"
 });
 
-const featuredProducts = [
-  getProduct("variable-message-signs"),
-  getProduct("traffic-control-units"),
-  getProduct("solar-light-towers"),
-  getProduct("speed-radars/speed-sentinel-advanced"),
-  getProduct("speed-radars/speed-sentinel-classic"),
-  getProduct("speed-radars/speed-sentinel-compact")
-].filter((product) => Boolean(product));
+const featuredEquipment = [
+  {
+    name: "Variable Message Signs",
+    label: "Rent or purchase · Traffic communication",
+    image: "/images/vms-board.png",
+    imageAlt: "Trailer-mounted Roadsafe variable message sign",
+    href: "/products/variable-message-signs"
+  },
+  {
+    name: "Traffic Control Units",
+    label: "Rent or purchase · Temporary traffic control",
+    image: "/images/traffic-control-unit-nobg.png",
+    imageAlt: "Roadsafe mobile traffic control units",
+    href: "/products/traffic-control-units"
+  },
+  {
+    name: "Solar Light Towers",
+    label: "Rental only · Worksite lighting",
+    image: "/images/solar-light-tower-nobg.png",
+    imageAlt: "Roadsafe mobile solar light tower",
+    href: "/products/solar-light-towers"
+  },
+  {
+    name: "Speed Radars",
+    label: "Rent or purchase · Speed management",
+    image: "/images/speed-sentinel-advanced.png",
+    imageAlt: "Roadsafe vehicle-activated speed radar display",
+    href: "/products/speed-radars"
+  },
+  {
+    name: "Warning Lights",
+    label: "Purchase only · Warning and delineation",
+    image: "/images/solar-warning-light-nobg.png",
+    imageAlt: "Roadsafe solar warning light",
+    href: "/products/warning-lights"
+  }
+];
+
+const featuredCaseStudies = [
+  {
+    corridor: "N3",
+    route: "Pietermaritzburg to Durban",
+    contractor: "WBHO",
+    duration: "13 months",
+    equipment: "VMS boards + speed radars",
+    description:
+      "Adaptable advance messaging and live speed feedback supported a long-running programme on one of KwaZulu-Natal’s busiest corridors.",
+    image: "/images/vms-field.jpg",
+    imageAlt: "Variable message sign used for a long-term road project",
+    href: "/case-studies#n3-wbho"
+  },
+  {
+    corridor: "R556",
+    route: "Bela-Bela to Tweespruit",
+    contractor: "Jodan Construction",
+    duration: "24 months",
+    equipment: "VMS boards + traffic huts",
+    description:
+      "A two-year deployment paired changing roadside information with practical operating points for traffic personnel.",
+    image: "/images/roadsafe-fleet.jpg",
+    imageAlt: "Roadsafe fleet supporting a regional road project",
+    href: "/case-studies#r556-jodan"
+  }
+];
 
 const clients = [
   {
@@ -173,17 +228,43 @@ export default function HomePage() {
               copy="Build one quote across multiple product families. We will help coordinate delivery, setup and support."
             />
           </Reveal>
-          <div className="product-grid">
-            {featuredProducts.map((product, index) =>
-              product ? (
-                <ProductCard
-                  key={product.path}
-                  product={product}
-                  index={index}
-                  priority={index < 2}
-                />
-              ) : null
-            )}
+          <div className="fleet-capacity" aria-label="Roadsafe rental fleet capacity">
+            <div>
+              <strong>20</strong>
+              <span>VMS boards in the fleet</span>
+            </div>
+            <div>
+              <strong>28</strong>
+              <span>Traffic control units in the fleet</span>
+            </div>
+          </div>
+          <div className="product-grid product-grid--featured">
+            {featuredEquipment.map((item, index) => (
+              <article className="product-card" key={item.href}>
+                <Link href={item.href} aria-label={`View ${item.name}`}>
+                  <div className="product-card__image">
+                    <Image
+                      src={item.image}
+                      alt={item.imageAlt}
+                      fill
+                      sizes="(max-width: 760px) 100vw, (max-width: 1100px) 50vw, 33vw"
+                      priority={index < 2}
+                    />
+                    <span className="product-card__number">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <div className="product-card__body">
+                    <p>{item.label}</p>
+                    <h3>{item.name}</h3>
+                    <span>
+                      View equipment
+                      <ArrowUpRight aria-hidden="true" />
+                    </span>
+                  </div>
+                </Link>
+              </article>
+            ))}
           </div>
           <div className="section-action">
             <TextLink href="/products">View the full equipment range</TextLink>
@@ -262,6 +343,51 @@ export default function HomePage() {
                 <span>{point}</span>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--dark home-cases">
+        <div className="container">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Proven on the road"
+              title="Long-term deployments. Recognised contractors."
+              copy="See how Roadsafe equipment supported changing traffic requirements across national and regional road projects."
+              light
+            />
+          </Reveal>
+          <div className="home-case-grid">
+            {featuredCaseStudies.map((study) => (
+              <article className="home-case-card" key={study.href}>
+                <Link href={study.href} aria-label={`Read the ${study.corridor} case study`}>
+                  <div className="home-case-card__image">
+                    <Image
+                      src={study.image}
+                      alt={study.imageAlt}
+                      fill
+                      sizes="(max-width: 900px) 100vw, 50vw"
+                    />
+                    <span>{study.duration}</span>
+                  </div>
+                  <div className="home-case-card__body">
+                    <p>{study.contractor} / {study.equipment}</p>
+                    <h3>{study.corridor}: {study.route}</h3>
+                    <p>{study.description}</p>
+                    <span>
+                      Read case study
+                      <ArrowUpRight aria-hidden="true" />
+                    </span>
+                  </div>
+                </Link>
+              </article>
+            ))}
+          </div>
+          <div className="section-action home-cases__action">
+            <Link className="button button--light" href="/case-studies">
+              View all case studies
+              <ArrowUpRight aria-hidden="true" size={18} />
+            </Link>
           </div>
         </div>
       </section>

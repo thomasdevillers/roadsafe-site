@@ -24,7 +24,6 @@ const caseStudies = [
     route: "Pietermaritzburg to Durban",
     contractor: "WBHO",
     duration: "13 months",
-    months: 13,
     equipment: ["Variable message signs", "Vehicle-activated speed radars"],
     image: "/images/vms-field.jpg",
     imageAlt: "Trailer-mounted variable message sign deployed beside a roadway",
@@ -42,7 +41,6 @@ const caseStudies = [
     route: "Nelspruit to Komatipoort",
     contractor: "Tau Pele",
     duration: "9 months",
-    months: 9,
     equipment: ["Variable message signs", "FlashGuard dummy speed cameras"],
     image: "/images/flashguard-camera.png",
     imageAlt: "Roadside FlashGuard dummy speed camera used as a visible speed deterrent",
@@ -60,7 +58,6 @@ const caseStudies = [
     route: "Ermelo toward the Eswatini border",
     contractor: "Roadspan",
     duration: "12 months",
-    months: 12,
     equipment: ["Variable message signs", "FlashGuard dummy speed cameras"],
     image: "/images/vms-hire.png",
     imageAlt: "Mobile variable message sign ready for a long-term road project",
@@ -78,7 +75,6 @@ const caseStudies = [
     route: "Bela-Bela to Tweespruit",
     contractor: "Jodan Construction",
     duration: "24 months",
-    months: 24,
     equipment: ["Variable message signs", "Traffic huts"],
     image: "/images/roadsafe-fleet.jpg",
     imageAlt: "Roadsafe mobile equipment prepared for deployment to a road project",
@@ -93,8 +89,6 @@ const caseStudies = [
 ];
 
 export default function CaseStudiesPage() {
-  const totalMonths = caseStudies.reduce((total, study) => total + study.months, 0);
-
   return (
     <>
       <StructuredData
@@ -115,7 +109,7 @@ export default function CaseStudiesPage() {
       />
       <PageHero
         title="Equipment proven across the long road."
-        description="Four contractor deployments. Four strategic routes. Roadside communication and speed-management equipment kept relevant as the works moved and conditions changed."
+        description="Selected contractor deployments across strategic routes, showing how roadside communication and speed-management equipment stayed relevant as works moved and conditions changed."
         image="/images/hero-vms.jpg"
         imageAlt="Variable message sign operating beside a South African roadway"
         eyebrow="Case studies"
@@ -128,15 +122,9 @@ export default function CaseStudiesPage() {
             <SectionHeading
               eyebrow="Project experience"
               title="Built for programmes measured in months, not moments."
-              copy="From high-volume national corridors to extended regional works, Roadsafe equipment has supported contractors through changing traffic conditions and moving work fronts."
+              copy="These selected projects show how Roadsafe equipment has supported contractors through changing traffic conditions and moving work fronts."
             />
           </Reveal>
-          <div className="case-proof__metrics">
-            <div><strong>4</strong><span>road corridors</span></div>
-            <div><strong>{totalMonths}</strong><span>combined deployment months</span></div>
-            <div><strong>4</strong><span>construction partners</span></div>
-            <div><strong>3</strong><span>equipment roles</span></div>
-          </div>
           <nav className="case-index" aria-label="Case studies on this page">
             {caseStudies.map((study, index) => (
               <a href={`#${study.id}`} key={study.id}>
