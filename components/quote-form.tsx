@@ -9,6 +9,7 @@ import { PENDING_QUOTE_CONVERSION_KEY } from "@/lib/analytics";
 type ProductLine = {
   product: string;
   quantity: number;
+  intent: "rental" | "purchase";
 };
 
 type FormMode = "guided" | "single";
@@ -20,22 +21,23 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
     () => products.find((product) => product.slug === initialProduct)?.slug || "",
     [initialProduct]
   );
+  const initialIntent = useMemo(
+    () =>
+      products.find((product) => product.slug === initialProduct)?.availability === "purchase"
+        ? "purchase"
+        : "rental",
+    [initialProduct]
+  );
   const [mode, setMode] = useState<FormMode>("guided");
   const [step, setStep] = useState(0);
   const [lines, setLines] = useState<ProductLine[]>([
-    { product: initialSelection, quantity: 1 }
+    { product: initialSelection, quantity: 1, intent: initialIntent }
   ]);
   const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
   const [error, setError] = useState("");
-  const selectedProducts = lines
-    .map((line) => products.find((product) => product.slug === line.product))
-    .filter((product) => Boolean(product));
-  const hasRental = selectedProducts.some(
-    (product) => product?.availability === "rental"
-  );
-  const hasPurchase = selectedProducts.some(
-    (product) => product?.availability === "purchase"
-  );
+  const selectedLines = lines.filter((line) => line.product);
+  const hasRental = selectedLines.some((line) => line.intent === "rental");
+  const hasPurchase = selectedLines.some((line) => line.intent === "purchase");
 
   function updateLine(index: number, update: Partial<ProductLine>) {
     setLines((current) =>
@@ -45,14 +47,22 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
     );
   }
 
+  function updateProduct(index: number, productSlug: string) {
+    const availability = products.find((product) => product.slug === productSlug)?.availability;
+    updateLine(index, {
+      product: productSlug,
+      intent: availability === "purchase" ? "purchase" : "rental"
+    });
+  }
+
   function addLine() {
-    setLines((current) => [...current, { product: "", quantity: 1 }]);
+    setLines((current) => [...current, { product: "", quantity: 1, intent: "rental" }]);
   }
 
   function removeLine(index: number) {
     setLines((current) =>
       current.length === 1
-        ? [{ product: "", quantity: 1 }]
+        ? [{ product: "", quantity: 1, intent: "rental" }]
         : current.filter((_, lineIndex) => lineIndex !== index)
     );
   }
@@ -80,9 +90,7 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
         .map((line) => ({
           product: products.find((product) => product.slug === line.product)?.name || line.product,
           quantity: line.quantity,
-          availability:
-            products.find((product) => product.slug === line.product)?.availability ||
-            "rental"
+          availability: line.intent
         })),
       rentalPeriod: hasRental ? form.get("rentalPeriod") : "Purchase only",
       requiredDate: form.get("requiredDate"),
@@ -194,7 +202,7 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
             <span>01</span>
             <div>
               <h2>Select the equipment.</h2>
-              <p>Add as many products as the project requires.</p>
+              <p>Add each product, choose rent or purchase, and set the quantity.</p>
             </div>
           </div>
           <div className="product-lines">
@@ -204,31 +212,52 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
                   <span>Product {index + 1}</span>
                   <select
                     value={line.product}
-                    onChange={(event) => updateLine(index, { product: event.target.value })}
+                    onChange={(event) => updateProduct(index, event.target.value)}
                     required={index === 0}
                     aria-label={`Product ${index + 1}`}
                   >
                     <option value="">Select equipment</option>
                     {products.map((product) => (
                       <option key={product.slug} value={product.slug}>
-                        {product.name} — {product.availability === "purchase" ? "Purchase" : "Rental"}
+                        {product.name} — {product.availability === "both"
+                          ? "Rent or purchase"
+                          : product.availability === "purchase"
+                            ? "Purchase only"
+                            : "Rental only"}
                       </option>
                     ))}
                   </select>
-                  {line.product && (
-                    <small
-                      className={`availability-tag availability-tag--${
-                        products.find((product) => product.slug === line.product)
-                          ?.availability || "rental"
-                      }`}
-                    >
-                      {products.find((product) => product.slug === line.product)
-                        ?.availability === "purchase"
-                        ? "Purchase only"
-                        : "Rental equipment"}
-                    </small>
-                  )}
                 </label>
+                {!line.product ? (
+                  <div className="intent-summary intent-summary--empty">
+                    <span>Requirement</span>
+                    <strong>Choose product</strong>
+                  </div>
+                ) : products.find((product) => product.slug === line.product)?.availability ===
+                  "both" ? (
+                    <label className="intent-field">
+                      <span>Requirement</span>
+                      <select
+                        value={line.intent}
+                        onChange={(event) =>
+                          updateLine(index, {
+                            intent: event.target.value as ProductLine["intent"]
+                          })
+                        }
+                        aria-label={`Requirement for product ${index + 1}`}
+                      >
+                        <option value="rental">Rent</option>
+                        <option value="purchase">Purchase</option>
+                      </select>
+                    </label>
+                  ) : (
+                  <div className="intent-summary">
+                    <span>Requirement</span>
+                    <strong>
+                      {line.intent === "purchase" ? "Purchase only" : "Rental only"}
+                    </strong>
+                  </div>
+                )}
                 <label className="quantity-field">
                   <span>Quantity</span>
                   <div>

@@ -11,6 +11,7 @@ import { absoluteUrl, SITE_URL } from "@/lib/seo";
 
 export function ProductDetail({ product }: { product: Product }) {
   const isPurchase = product.availability === "purchase";
+  const isDual = product.availability === "both";
   const preferredRelated = products
     .filter(
       (item) =>
@@ -89,6 +90,8 @@ export function ProductDetail({ product }: { product: Product }) {
             <Eyebrow>
               {isPurchase
                 ? "Purchase-only range"
+                : isDual
+                  ? "Available to rent or purchase"
                 : product.flagship
                   ? "Flagship rental fleet"
                   : product.categoryLabel}
@@ -97,7 +100,11 @@ export function ProductDetail({ product }: { product: Product }) {
             <p>{product.tagline}</p>
             <div className="button-row">
               <Link className="button" href={`/request-a-quote?product=${product.slug}`}>
-                {isPurchase ? "Request purchase quote" : "Request this equipment"}
+                {isPurchase
+                  ? "Request purchase quote"
+                  : isDual
+                    ? "Request rental or purchase quote"
+                    : "Request this equipment"}
                 <ArrowUpRight aria-hidden="true" size={18} />
               </Link>
               {product.specUrl && (
@@ -115,7 +122,13 @@ export function ProductDetail({ product }: { product: Product }) {
           </div>
           <div className="product-hero__visual">
             <div className="product-hero__coordinates" aria-hidden="true">
-              <span>{isPurchase ? "ZA / PURCHASE RANGE" : "ZA / RENTAL FLEET"}</span>
+              <span>
+                {isPurchase
+                  ? "ZA / PURCHASE RANGE"
+                  : isDual
+                    ? "ZA / RENT OR PURCHASE"
+                    : "ZA / RENTAL FLEET"}
+              </span>
               <span>{isPurchase ? "AVAILABLE TO ORDER" : "READY TO DEPLOY"}</span>
             </div>
             <Image
@@ -129,9 +142,21 @@ export function ProductDetail({ product }: { product: Product }) {
         </div>
         <div className="product-hero__rail">
           <div className="container">
-            <span>{isPurchase ? "Available for purchase" : "Rental durations to suit the project"}</span>
+            <span>
+              {isPurchase
+                ? "Available for purchase"
+                : isDual
+                  ? "Available to rent or purchase"
+                  : "Rental durations to suit the project"}
+            </span>
             <span>Nationwide delivery</span>
-            <span>{isPurchase ? "Product support included" : "Installation & maintenance included"}</span>
+            <span>
+              {isPurchase
+                ? "Product support included"
+                : isDual
+                  ? "Deployment and product support"
+                  : "Installation & maintenance included"}
+            </span>
           </div>
         </div>
       </section>
@@ -148,12 +173,20 @@ export function ProductDetail({ product }: { product: Product }) {
               ))}
             </ul>
             <TextLink href={`/request-a-quote?product=${product.slug}`}>
-              {isPurchase ? "Add to purchase quote" : "Add to quote"}
+              {isPurchase
+                ? "Add to purchase quote"
+                : isDual
+                  ? "Choose rent or purchase"
+                  : "Add to quote"}
             </TextLink>
           </Reveal>
           <Reveal className="service-panel">
             <p className="service-panel__label">
-              {isPurchase ? "Purchase support" : "Rental support included"}
+              {isPurchase
+                ? "Purchase support"
+                : isDual
+                  ? "Rental and purchase support"
+                  : "Rental support included"}
             </p>
             <div>
               <MapPinned aria-hidden="true" />
@@ -161,15 +194,25 @@ export function ProductDetail({ product }: { product: Product }) {
               <p>
                 {isPurchase
                   ? "Roadsafe coordinates delivery to your project location."
+                  : isDual
+                    ? "Roadsafe coordinates delivery for purchases and delivery and collection for rentals."
                   : "We coordinate delivery and collection around your project programme."}
               </p>
             </div>
             <div>
-              {isPurchase ? <PackageCheck aria-hidden="true" /> : <Wrench aria-hidden="true" />}
-              <h3>{isPurchase ? "Specified for the job" : "Installed and maintained"}</h3>
+              {isPurchase || isDual ? <PackageCheck aria-hidden="true" /> : <Wrench aria-hidden="true" />}
+              <h3>
+                {isPurchase
+                  ? "Specified for the job"
+                  : isDual
+                    ? "Choose the right supply option"
+                    : "Installed and maintained"}
+              </h3>
               <p>
                 {isPurchase
                   ? "We help confirm the right warning-light format for the intended use."
+                  : isDual
+                    ? "Rent for a project programme or purchase equipment for ongoing use."
                   : "Roadsafe configures the equipment and keeps it operating reliably."}
               </p>
             </div>
@@ -219,6 +262,8 @@ export function ProductDetail({ product }: { product: Product }) {
             copy={
               isPurchase
                 ? "Combine warning-light products in one purchase quote and let Roadsafe coordinate delivery."
+                : isDual
+                  ? "Combine rental and purchase requirements in one quote and let Roadsafe coordinate supply and deployment."
                 : "Combine systems in a single quote and let Roadsafe coordinate delivery, setup and collection."
             }
           />
@@ -234,6 +279,8 @@ export function ProductDetail({ product }: { product: Product }) {
         title={
           isPurchase
             ? `Add ${product.shortName} to your equipment order.`
+            : isDual
+              ? `Rent or purchase ${product.shortName} for the next project.`
             : `Put ${product.shortName} on your next project.`
         }
       />

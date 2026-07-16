@@ -40,7 +40,9 @@ export default function ResourcesPage() {
                   <p>
                     {product.availability === "purchase"
                       ? `Purchase only · ${product.categoryLabel}`
-                      : product.categoryLabel}
+                      : product.availability === "both"
+                        ? `Rent or purchase · ${product.categoryLabel}`
+                        : `Rental only · ${product.categoryLabel}`}
                   </p>
                   <h2>{product.name}</h2>
                 </div>

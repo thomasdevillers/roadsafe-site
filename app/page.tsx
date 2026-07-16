@@ -8,9 +8,9 @@ import { Eyebrow, ProductCard, SectionHeading, TextLink } from "@/components/ui"
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "Road Safety Equipment Rental South Africa | Roadsafe Traffic",
+  title: "Road Safety Equipment Rental & Sales South Africa | Roadsafe Traffic",
   description:
-    "Rent VMS boards, traffic control units, speed radars and solar light towers with nationwide delivery, installation and support from Roadsafe Traffic.",
+    "Rent or purchase VMS boards, traffic control units and speed radars, or hire solar light towers, with nationwide delivery and support from Roadsafe Traffic.",
   path: "/"
 });
 
@@ -67,7 +67,7 @@ export default function HomePage() {
           RT / ZA
         </div>
         <div className="container home-hero__content">
-          <Eyebrow light>Road safety equipment rental</Eyebrow>
+          <Eyebrow light>Road safety equipment supply</Eyebrow>
           <h1>Informing the motorist.</h1>
           <p>
             Reliable traffic communication and control equipment, delivered,
@@ -86,7 +86,7 @@ export default function HomePage() {
         </div>
         <div className="home-hero__rail">
           <div className="container">
-            <span>01 / RENTAL FIRST</span>
+            <span>01 / RENT OR PURCHASE</span>
             <span>02 / NATIONWIDE DELIVERY</span>
             <span>03 / SAME-DAY RESPONSE</span>
           </div>
@@ -97,7 +97,7 @@ export default function HomePage() {
         <div className="container">
           <Reveal>
             <SectionHeading
-              eyebrow="Flagship rental equipment"
+              eyebrow="Flagship road safety equipment"
               title="Clear communication. Controlled traffic. Fewer unknowns."
               copy="Road construction does not wait for perfect conditions. Roadsafe supplies the systems contractors need to communicate changes, control movement and keep works visible."
             />
@@ -204,7 +204,7 @@ export default function HomePage() {
               <span>01</span>
               <Clock3 aria-hidden="true" />
               <h3>Tell us what the project needs</h3>
-              <p>Select one or more products, the rental period and required date.</p>
+              <p>Select one or more products, choose rent or purchase, and add the details you know.</p>
             </div>
             <div className="process-step">
               <span>02</span>
@@ -216,7 +216,7 @@ export default function HomePage() {
               <span>03</span>
               <Wrench aria-hidden="true" />
               <h3>Equipment stays supported</h3>
-              <p>Maintenance and collection are handled for the duration of the rental.</p>
+              <p>Rentals stay maintained through collection, while purchases include practical product support.</p>
             </div>
           </div>
           <div className="section-action">
@@ -253,7 +253,7 @@ export default function HomePage() {
           <div className="quality-points">
             {[
               "Equipment selected for demanding sites",
-              "Flexible rental periods",
+              "Flexible rental and purchase options",
               "Nationwide delivery and collection",
               "Same-business-day quote response"
             ].map((point) => (

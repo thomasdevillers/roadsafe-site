@@ -6,7 +6,7 @@ export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.roadsa
   ""
 );
 export const DEFAULT_DESCRIPTION =
-  "Road safety equipment rentals, delivery and support across South Africa, including VMS boards, traffic control units, speed radars and solar light towers.";
+  "Road safety equipment rental and sales across South Africa, including VMS boards, traffic control units, speed radars, solar light towers and warning lights.";
 export const DEFAULT_OG_IMAGE = {
   url: "/images/roadsafe-og.jpg",
   width: 1200,

@@ -15,6 +15,9 @@ export function CategoryDetail({ category }: { category: ProductCategory }) {
   const purchaseOnly = categoryProducts.every(
     (product) => product.availability === "purchase"
   );
+  const rentOrPurchase = categoryProducts.some(
+    (product) => product.availability === "both"
+  );
 
   return (
     <>
@@ -81,28 +84,50 @@ export function CategoryDetail({ category }: { category: ProductCategory }) {
               sizes="(max-width: 900px) 100vw, 50vw"
             />
             <span className="split-image__label">
-              {purchaseOnly ? "Purchase-only range" : "Nationwide support"}
+              {purchaseOnly
+                ? "Purchase-only range"
+                : rentOrPurchase
+                  ? "Rent or purchase"
+                  : "Nationwide rental support"}
             </span>
           </Reveal>
           <Reveal className="split-copy">
             <p className="eyebrow eyebrow--light">
-              {purchaseOnly ? "Purchase made practical" : "Rental made practical"}
+              {purchaseOnly
+                ? "Purchase made practical"
+                : rentOrPurchase
+                  ? "Flexible supply options"
+                  : "Rental made practical"}
             </p>
             <h2>
               {purchaseOnly
                 ? "One supplier for a complete warning-light order."
-                : "One supplier from dispatch to collection."}
+                : rentOrPurchase
+                  ? "Rent for the project or purchase for ongoing use."
+                  : "One supplier from dispatch to collection."}
             </h2>
             <p>
               {purchaseOnly
                 ? "Select the warning and delineation products your site needs, combine them in one quote and arrange delivery across South Africa."
-                : "Roadsafe handles delivery, installation, maintenance and collection around the needs of active construction sites."}
+                : rentOrPurchase
+                  ? "Choose rent or purchase for each item, combine both in one quote and let Roadsafe coordinate delivery across South Africa."
+                  : "Roadsafe handles delivery, installation, maintenance and collection around the needs of active construction sites."}
             </p>
             <Link
               className="button button--light"
-              href={purchaseOnly ? "/request-a-quote?type=purchase" : "/rentals"}
+              href={
+                purchaseOnly
+                  ? "/request-a-quote?type=purchase"
+                  : rentOrPurchase
+                    ? "/request-a-quote"
+                    : "/rentals"
+              }
             >
-              {purchaseOnly ? "Request purchase quote" : "How rentals work"}
+              {purchaseOnly
+                ? "Request purchase quote"
+                : rentOrPurchase
+                  ? "Build an equipment quote"
+                  : "How rentals work"}
               <ArrowUpRight aria-hidden="true" size={18} />
             </Link>
           </Reveal>
@@ -112,6 +137,8 @@ export function CategoryDetail({ category }: { category: ProductCategory }) {
         title={
           purchaseOnly
             ? "Build a warning-light order around the site."
+            : rentOrPurchase
+              ? "Choose the supply model that fits the project."
             : undefined
         }
       />

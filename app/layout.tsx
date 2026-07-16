@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
-  category: "Road safety equipment rental",
+  category: "Road safety equipment rental and sales",
   referrer: "origin-when-cross-origin",
   formatDetection: { email: false, address: false, telephone: false },
   openGraph: {
@@ -137,8 +137,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body>
+      <head>
         <GoogleAnalytics />
+      </head>
+      <body>
         <ContactTracking />
         <StructuredData data={globalStructuredData} />
         <a className="skip-link" href="#main-content">

@@ -12,7 +12,7 @@ import { StructuredData } from "@/components/structured-data";
 export const metadata = createPageMetadata({
   title: "Road Safety Equipment for Hire & Purchase",
   description:
-    "Explore VMS boards, traffic control units, speed radar signs and solar light towers for hire, plus road warning equipment for purchase in South Africa.",
+    "Explore VMS boards, traffic control units and speed radar signs for hire or purchase, solar light towers for hire, and road warning equipment for purchase in South Africa.",
   path: "/products"
 });
 
@@ -68,7 +68,7 @@ export default function ProductsPage() {
                   />
                 </div>
                 <div className="flagship-card__body">
-                  <Eyebrow>Priority rental fleet</Eyebrow>
+                  <Eyebrow>Available to rent or purchase</Eyebrow>
                   <h2>{product.name}</h2>
                   <p>{product.tagline}</p>
                   <Link className="text-link" href={`/products/${product.path}`}>
@@ -86,7 +86,7 @@ export default function ProductsPage() {
           <SectionHeading
             light
             eyebrow="Complete catalogue"
-            title="Five equipment families. One dependable rental partner."
+            title="Five equipment families. One dependable equipment partner."
           />
           <div className="category-list">
             {categories.map((category, index) => (

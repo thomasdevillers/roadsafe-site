@@ -67,7 +67,9 @@ export function ProductCard({
           <p>
             {product.availability === "purchase"
               ? `Purchase only · ${product.categoryLabel}`
-              : product.categoryLabel}
+              : product.availability === "both"
+                ? `Rent or purchase · ${product.categoryLabel}`
+                : `Rental only · ${product.categoryLabel}`}
           </p>
           <h3>{product.name}</h3>
           <span>

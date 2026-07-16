@@ -82,7 +82,7 @@ test("mobile navigation opens and reaches products", async ({ page }) => {
 
 test("product quote link preselects equipment", async ({ page }) => {
   await page.goto("/products/variable-message-signs");
-  await page.getByRole("link", { name: "Request this equipment" }).click();
+  await page.getByRole("link", { name: "Request rental or purchase quote" }).click();
   await expect(page.locator("select").first()).toHaveValue("variable-message-signs");
 });
 
@@ -142,6 +142,26 @@ test("purchase-only quotes omit rental period and mixed quotes restore it", asyn
   await expect(page.getByText("Rental items only")).toBeVisible();
   await page.getByRole("button", { name: "Continue" }).click();
   await expect(page.getByRole("heading", { name: "Where should we respond?" })).toBeVisible();
+});
+
+test("dual-availability equipment customises rental and purchase questions", async ({ page }) => {
+  await page.goto("/request-a-quote?product=variable-message-signs");
+
+  await expect(page.getByLabel("Requirement for product 1")).toHaveValue("rental");
+  await expect(page.getByLabel("Rental period")).toHaveCount(1);
+
+  await page.getByLabel("Requirement for product 1").selectOption("purchase");
+  await expect(page.getByLabel("Rental period")).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "Define the order." })).toBeVisible();
+
+  await page.getByRole("button", { name: "Add another product" }).click();
+  await page.getByLabel("Product 2", { exact: true }).selectOption("speed-sentinel-classic");
+  await expect(page.getByLabel("Requirement for product 2")).toHaveValue("rental");
+  await expect(page.getByLabel("Rental period")).toHaveCount(1);
+  await expect(page.getByText("Rental items only")).toBeVisible();
+
+  await page.getByLabel("Requirement for product 2").selectOption("purchase");
+  await expect(page.getByLabel("Rental period")).toHaveCount(0);
 });
 
 test("replacement hero and product imagery is served", async ({ page }) => {

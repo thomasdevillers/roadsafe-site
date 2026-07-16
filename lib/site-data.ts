@@ -10,7 +10,7 @@ export type Product = {
   name: string;
   shortName: string;
   category: "message" | "control" | "radar" | "lighting" | "warning";
-  availability: "rental" | "purchase";
+  availability: "rental" | "purchase" | "both";
   categoryLabel: string;
   categoryPath: string;
   tagline: string;
@@ -59,7 +59,7 @@ export const products: Product[] = [
     name: "Variable Message Signs",
     shortName: "VMS Boards",
     category: "message",
-    availability: "rental",
+    availability: "both",
     categoryLabel: "Traffic communication",
     categoryPath: "/products/variable-message-signs",
     tagline: "Put the right message in front of every driver.",
@@ -93,7 +93,7 @@ export const products: Product[] = [
     name: "Traffic Control Units",
     shortName: "TCU",
     category: "control",
-    availability: "rental",
+    availability: "both",
     categoryLabel: "Temporary traffic control",
     categoryPath: "/products/traffic-control-units",
     tagline: "Remote traffic control built for active roadworks.",
@@ -157,7 +157,7 @@ export const products: Product[] = [
     name: "Speed Sentinel Classic",
     shortName: "Sentinel Classic",
     category: "radar",
-    availability: "rental",
+    availability: "both",
     categoryLabel: "Vehicle-activated speed radar",
     categoryPath: "/products/speed-radars",
     tagline: "Immediate visual feedback that changes driver behaviour.",
@@ -190,7 +190,7 @@ export const products: Product[] = [
     name: "Speed Sentinel Compact",
     shortName: "Sentinel Compact",
     category: "radar",
-    availability: "rental",
+    availability: "both",
     categoryLabel: "Vehicle-activated speed radar",
     categoryPath: "/products/speed-radars",
     tagline: "Compact roadside speed feedback with a clear warning.",
@@ -219,7 +219,7 @@ export const products: Product[] = [
     name: "Speed Sentinel Advanced",
     shortName: "Sentinel Advanced",
     category: "radar",
-    availability: "rental",
+    availability: "both",
     categoryLabel: "Vehicle-activated speed radar",
     categoryPath: "/products/speed-radars",
     tagline: "Larger-format speed feedback for demanding approaches.",
@@ -252,7 +252,7 @@ export const products: Product[] = [
     name: "Speed Sentinel Essential",
     shortName: "Sentinel Essential",
     category: "radar",
-    availability: "rental",
+    availability: "both",
     categoryLabel: "Vehicle-activated speed radar",
     categoryPath: "/products/speed-radars",
     tagline: "Essential speed feedback in a highly portable format.",
@@ -281,7 +281,7 @@ export const products: Product[] = [
     name: "FlashGuard Dummy Camera",
     shortName: "FlashGuard",
     category: "radar",
-    availability: "rental",
+    availability: "both",
     categoryLabel: "Speed deterrent",
     categoryPath: "/products/speed-radars",
     tagline: "A visible speed deterrent with radar-triggered flash.",
