@@ -163,7 +163,7 @@ export const products: Product[] = [
     tagline: "Immediate visual feedback that changes driver behaviour.",
     description:
       "A programmable vehicle-activated speed display with clear red and green feedback and an emotional warning message for high-impact speed awareness.",
-    image: "/images/speed-sentinel-classic.jpg",
+    image: "/images/speed-sentinel-classic-nobg.png",
     imageAlt: "Roadsafe Speed Sentinel Classic vehicle-activated speed display",
     features: [
       "Programmable speed threshold",
@@ -364,7 +364,7 @@ export const products: Product[] = [
     tagline: "Bright, self-powered warning for active work zones.",
     description:
       "A durable solar warning light for roadworks, construction zones and temporary hazards where visibility must remain consistent.",
-    image: "/images/solar-warning-light.jpg",
+    image: "/images/solar-warning-light-nobg.png",
     imageAlt: "Yellow Roadsafe solar work-zone warning light",
     features: [
       "Solar-powered operation",
@@ -381,6 +381,36 @@ export const products: Product[] = [
     ]
   },
   {
+    slug: "sign-mounted-solar-light",
+    path: "warning-lights/sign-mounted-solar-light",
+    name: "Sign Mounted Solar Light",
+    shortName: "Sign Solar Light",
+    category: "warning",
+    availability: "purchase",
+    categoryLabel: "Sign-mounted warning",
+    categoryPath: "/products/warning-lights",
+    tagline: "Self-powered visibility for roadside signs and temporary hazards.",
+    description:
+      "A compact solar warning light designed to mount directly to roadside and temporary traffic signs, adding an attention-grabbing amber flash without external cabling.",
+    image: "/images/sign-mounted-solar-light-nobg.png",
+    imageAlt: "Yellow sign-mounted solar warning light with amber LED lens",
+    features: [
+      "Integrated top-mounted solar panel",
+      "High-visibility amber LED array",
+      "Automatic dusk-to-dawn operation",
+      "Compact sign and post mounting format",
+      "Weather-resistant yellow housing"
+    ],
+    specs: [
+      { label: "LED configuration", value: "8 amber LEDs", needsConfirmation: true },
+      { label: "Flash pattern", value: "Single-flash warning mode", needsConfirmation: true },
+      { label: "Solar charging", value: "Integrated monocrystalline panel", needsConfirmation: true },
+      { label: "Operating cycle", value: "Up to 7 nights per full charge", needsConfirmation: true },
+      { label: "Mounting", value: "Sign, barrier or post bracket", needsConfirmation: true },
+      { label: "Ingress protection", value: "IP65 weather-resistant housing", needsConfirmation: true }
+    ]
+  },
+  {
     slug: "beacon-light",
     path: "warning-lights/beacon-light",
     name: "Beacon Light",
@@ -392,7 +422,7 @@ export const products: Product[] = [
     tagline: "Portable high-visibility warning, ready when needed.",
     description:
       "A compact multi-mode beacon for roadside incidents, temporary hazards, vehicles and emergency signalling.",
-    image: "/images/beacon-light.png",
+    image: "/images/beacon-light-nobg.png",
     imageAlt: "Round amber Roadsafe LED beacon light",
     features: [
       "High-output LED array",
@@ -420,8 +450,8 @@ export const products: Product[] = [
     tagline: "Clear directional warning for changing work zones.",
     description:
       "A high-visibility directional warning unit for lane closures, diversions and mobile roadworks, designed for clear recognition at approach.",
-    image: "/images/arrow-warning-board.png",
-    imageAlt: "Three Roadsafe double arrow warning lights with signal lamps",
+    image: "/images/double-arrow-flashing-light-nobg.png",
+    imageAlt: "Roadsafe double arrow flashing light with amber signal lamps",
     features: [
       "Clear directional arrow panels",
       "Integrated signal lamps",
@@ -448,7 +478,7 @@ export const products: Product[] = [
     tagline: "A robust solar marker for boundaries and lane guidance.",
     description:
       "A compact solar marker with a raised half-moon profile for boundaries, traffic guidance and night-time delineation.",
-    image: "/images/half-moon-road-stud.jpg",
+    image: "/images/half-moon-road-stud-nobg.png",
     imageAlt: "Pair of Roadsafe half moon solar road studs",
     features: [
       "Self-contained solar power",
@@ -493,7 +523,7 @@ export const categories: ProductCategory[] = [
     name: "Vehicle-Activated Speed Radars",
     kicker: "Five deployment options",
     description: "Speed feedback and deterrent systems sized for everything from compact works to high-speed approaches.",
-    image: "/images/speed-sentinel-classic.jpg",
+    image: "/images/speed-sentinel-classic-nobg.png",
     imageAlt: "Roadsafe vehicle-activated speed display",
     productPaths: [
       "speed-radars/speed-sentinel-classic",
@@ -517,7 +547,7 @@ export const categories: ProductCategory[] = [
     slug: "warning-lights",
     path: "warning-lights",
     name: "Warning Lights & Delineation",
-    kicker: "Six purchase-only products",
+    kicker: "Seven purchase-only products",
     description: "Purchase-only solar and rechargeable visibility equipment for hazards, lane guidance and active traffic control.",
     image: "/images/arrow-warning-board.png",
     imageAlt: "Roadsafe arrow warning boards",
@@ -525,6 +555,7 @@ export const categories: ProductCategory[] = [
       "warning-lights/solar-road-stud",
       "warning-lights/traffic-wand-light",
       "warning-lights/solar-warning-light",
+      "warning-lights/sign-mounted-solar-light",
       "warning-lights/beacon-light",
       "warning-lights/double-arrow-light",
       "warning-lights/half-moon-road-stud"

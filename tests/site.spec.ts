@@ -100,15 +100,26 @@ test("homepage rental range excludes purchase-only warning lights", async ({ pag
   await expect(rentalRange.getByText("Solar Light Towers")).toBeVisible();
 });
 
-test("warning lights are a six-product purchase-only range", async ({ page }) => {
+test("warning lights are a seven-product purchase-only range", async ({ page }) => {
   await page.goto("/products/warning-lights");
-  await expect(page.getByText("Six purchase-only products")).toBeVisible();
-  await expect(page.locator(".product-grid").first().locator("article")).toHaveCount(6);
+  await expect(page.getByText("Seven purchase-only products")).toBeVisible();
+  await expect(page.locator(".product-grid").first().locator("article")).toHaveCount(7);
 
   await page.goto("/products/warning-lights/double-arrow-light");
   await expect(page.getByRole("heading", { name: "Double Arrow Light" })).toBeVisible();
   await expect(page.getByText("Purchase-only range")).toBeVisible();
   await expect(page.getByRole("link", { name: "Request purchase quote" })).toBeVisible();
+
+  await page.goto("/products/warning-lights/sign-mounted-solar-light");
+  await expect(page.getByRole("heading", { name: "Sign Mounted Solar Light" })).toBeVisible();
+  await expect(page.getByAltText("Yellow sign-mounted solar warning light with amber LED lens"))
+    .toHaveAttribute("src", /sign-mounted-solar-light-nobg/);
+
+  await page.goto("/resources");
+  const resource = page.locator(".resource-row").filter({ hasText: "Sign Mounted Solar Light" });
+  await expect(resource).toBeVisible();
+  await expect(resource.getByRole("link", { name: "Product details" }))
+    .toHaveAttribute("href", "/products/warning-lights/sign-mounted-solar-light");
 });
 
 test("legacy arrow warning routes redirect to Double Arrow Light", async ({ page }) => {
@@ -146,6 +157,23 @@ test("replacement hero and product imagery is served", async ({ page }) => {
   await expect(
     page.getByAltText("Trailer-mounted Roadsafe solar light tower with raised LED lighting mast")
   ).toHaveAttribute("src", /solar-light-tower-nobg/);
+
+  await page.goto("/products/warning-lights/solar-warning-light");
+  await expect(page.getByAltText("Yellow Roadsafe solar work-zone warning light"))
+    .toHaveAttribute("src", /solar-warning-light-nobg/);
+
+  await page.goto("/products/warning-lights/beacon-light");
+  await expect(page.getByAltText("Round amber Roadsafe LED beacon light"))
+    .toHaveAttribute("src", /beacon-light-nobg/);
+
+  await page.goto("/products/warning-lights/half-moon-road-stud");
+  await expect(page.getByAltText("Pair of Roadsafe half moon solar road studs"))
+    .toHaveAttribute("src", /half-moon-road-stud-nobg/);
+
+  await page.goto("/products/speed-radars/speed-sentinel-classic");
+  await expect(
+    page.getByAltText("Roadsafe Speed Sentinel Classic vehicle-activated speed display")
+  ).toHaveAttribute("src", /speed-sentinel-classic-nobg/);
 });
 
 test("quote supports single-page mode and development submission", async ({ page }) => {

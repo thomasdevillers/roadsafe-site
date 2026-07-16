@@ -20,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [...staticPaths, ...productPaths].map((path) => ({
     url: `${SITE_URL}${path}`,
-    lastModified: new Date("2026-07-15"),
+    lastModified: new Date("2026-07-16"),
     changeFrequency:
       path === "" || path === "/products" ? "weekly" : "monthly",
     priority:
