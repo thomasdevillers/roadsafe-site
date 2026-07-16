@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, Check, LoaderCircle, Minus, Plus, Send, Trash2 } from "lucide-react";
 import { products } from "@/lib/site-data";
+import { PENDING_QUOTE_CONVERSION_KEY } from "@/lib/analytics";
 
 type ProductLine = {
   product: string;
@@ -110,6 +111,19 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
       });
       const result = await response.json();
       if (!response.ok) throw new Error(result.message || "The quote could not be submitted.");
+      try {
+        sessionStorage.setItem(
+          PENDING_QUOTE_CONVERSION_KEY,
+          JSON.stringify({
+            reference: result.reference,
+            productCount: payload.products.length,
+            hasRental,
+            hasPurchase
+          })
+        );
+      } catch {
+        // Conversion measurement must never prevent a successful quote request.
+      }
       window.location.assign(`/quote-confirmation?ref=${encodeURIComponent(result.reference)}`);
     } catch (submissionError) {
       setStatus("error");

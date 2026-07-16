@@ -2,6 +2,8 @@ import Link from "next/link";
 import { ArrowRight, Check, MessageCircle, Phone } from "lucide-react";
 import { contact } from "@/lib/site-data";
 import { createPageMetadata } from "@/lib/seo";
+import { GOOGLE_ANALYTICS_ID } from "@/lib/analytics";
+import { QuoteConversion } from "@/components/quote-conversion";
 
 export const metadata = {
   ...createPageMetadata({
@@ -21,6 +23,7 @@ export default async function QuoteConfirmationPage({
   const { ref } = await searchParams;
   return (
     <section className="confirmation-page">
+      {GOOGLE_ANALYTICS_ID && <QuoteConversion reference={ref} />}
       <div className="confirmation-mark">
         <Check aria-hidden="true" />
       </div>

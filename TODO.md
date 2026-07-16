@@ -39,7 +39,8 @@ Complete these items before the production site replaces the current website.
 - Create a Brevo transactional API key.
 - Add `BREVO_API_KEY`, `BREVO_SENDER_EMAIL`, `BREVO_SENDER_NAME`,
   `QUOTE_TO_EMAIL`, `NEXT_PUBLIC_SITE_URL`, and
-  `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` to the Vercel project.
+  `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`, and `NEXT_PUBLIC_GOOGLE_ANALYTICS_ID`
+  to the Vercel project.
 - Keep `QUOTE_TO_EMAIL=nicki@roadsafe.co.za`.
 - Submit test quotes from desktop and mobile and verify:
   - Roadsafe receives the full request.

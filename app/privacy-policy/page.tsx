@@ -23,6 +23,10 @@ export default function PrivacyPolicyPage() {
           body: "Information is used to respond to enquiries, prepare quotations, coordinate equipment rentals, provide support and maintain business records."
         },
         {
+          title: "Website analytics",
+          body: "The website uses Google Analytics to understand visits, equipment-page engagement and completed quote requests. Google may process device, browser, approximate location and advertising-attribution information in accordance with its own privacy terms."
+        },
+        {
           title: "Sharing and service providers",
           body: "Information may be processed by service providers used for website hosting, email delivery and business administration. Roadsafe Traffic does not intend to sell personal information."
         },
