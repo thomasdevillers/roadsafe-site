@@ -46,6 +46,7 @@ export const contact = {
 export const navigation = [
   { label: "Products", href: "/products" },
   { label: "Rentals", href: "/rentals" },
+  { label: "Case studies", href: "/case-studies" },
   { label: "Support", href: "/support" },
   { label: "Resources", href: "/resources" },
   { label: "About", href: "/about" },

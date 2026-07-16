@@ -7,6 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/products",
     "/rentals",
+    "/case-studies",
     "/support",
     "/resources",
     "/about",
@@ -26,7 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority:
       path === ""
         ? 1
-        : path === "/products" || path === "/rentals"
+        : path === "/products" || path === "/rentals" || path === "/case-studies"
           ? 0.9
           : path.startsWith("/products")
             ? 0.8
