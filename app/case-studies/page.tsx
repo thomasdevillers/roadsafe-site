@@ -13,8 +13,8 @@ export const metadata = createPageMetadata({
   description:
     "See how Roadsafe supported long-term road projects for WBHO, Tau Pele, Roadspan and Jodan Construction with VMS boards, speed radars and traffic equipment.",
   path: "/case-studies",
-  image: "/images/hero-vms.jpg",
-  imageAlt: "Variable message sign deployed beside a South African road"
+  image: "/images/hero-roadworks.jpg",
+  imageAlt: "Road construction crew working on newly laid asphalt at sunset"
 });
 
 const caseStudies = [
@@ -110,8 +110,8 @@ export default function CaseStudiesPage() {
       <PageHero
         title="Equipment proven across the long road."
         description="Selected contractor deployments across strategic routes, showing how roadside communication and speed-management equipment stayed relevant as works moved and conditions changed."
-        image="/images/hero-vms.jpg"
-        imageAlt="Variable message sign operating beside a South African roadway"
+        image="/images/hero-roadworks.jpg"
+        imageAlt="Road construction crew working on newly laid asphalt at sunset"
         eyebrow="Case studies"
         currentHref="/case-studies"
       />
