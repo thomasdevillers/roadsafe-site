@@ -19,8 +19,8 @@ export const metadata = createPageMetadata({
   description:
     "Rent or purchase solar-powered VMS boards with remote message control, nationwide delivery and project support from Roadsafe Traffic.",
   path: "/vms-board-rental",
-  image: "/images/vms-field.jpg",
-  imageAlt: "Roadsafe variable message sign displaying a roadside safety message"
+  image: "/images/adhero.jpg",
+  imageAlt: "Two Roadsafe variable message signs displaying speed and safety messages"
 });
 
 const faqs = [
@@ -111,8 +111,8 @@ export default function VmsBoardLandingPage() {
           </div>
           <div className="vms-landing-hero__visual">
             <Image
-              src="/images/vms-field.jpg"
-              alt="Roadsafe variable message sign displaying a roadside safety message"
+              src="/images/adhero.jpg"
+              alt="Two Roadsafe variable message signs displaying speed and safety messages"
               fill
               priority
               sizes="(max-width: 900px) 100vw, 50vw"
