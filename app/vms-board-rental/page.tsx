@@ -111,8 +111,8 @@ export default function VmsBoardLandingPage() {
           </div>
           <div className="vms-landing-hero__visual">
             <Image
-              src="/images/adhero.jpg"
-              alt="Two Roadsafe variable message signs displaying speed and safety messages"
+              src="/images/vms-board.png"
+              alt="Trailer-mounted Roadsafe variable message sign"
               fill
               priority
               sizes="(max-width: 900px) 100vw, 50vw"
@@ -167,8 +167,8 @@ export default function VmsBoardLandingPage() {
         <div className="container vms-equipment-proof__grid">
           <div className="vms-equipment-proof__visual">
             <Image
-              src="/images/vms-board.png"
-              alt="Trailer-mounted Roadsafe variable message sign"
+              src="/images/adhero.jpg"
+              alt="Two Roadsafe variable message signs displaying speed and safety messages"
               fill
               sizes="(max-width: 900px) 100vw, 50vw"
             />
