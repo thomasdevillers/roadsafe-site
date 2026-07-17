@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/resources",
     "/about",
     "/contact",
+    "/vms-board-rental",
     "/request-a-quote"
   ];
   const productPaths = new Set([
