@@ -86,6 +86,19 @@ test("product quote link preselects equipment", async ({ page }) => {
   await expect(page.locator("select").first()).toHaveValue("variable-message-signs");
 });
 
+test("quote-based equipment pages use service structured data", async ({ page }) => {
+  await page.goto("/products/variable-message-signs");
+
+  const structuredData = await page.locator('script[type="application/ld+json"]').evaluateAll(
+    (scripts) => scripts.map((script) => JSON.parse(script.textContent || "null"))
+  );
+  const serialized = JSON.stringify(structuredData);
+
+  expect(serialized).not.toContain('"@type":"Product"');
+  expect(serialized).toContain('"@type":"Service"');
+  expect(serialized).toContain('"serviceType":"Variable Message Signs rental and supply"');
+});
+
 test("homepage rental range excludes purchase-only warning lights", async ({ page }) => {
   await page.goto("/");
   const rentalRange = page.locator("section").filter({

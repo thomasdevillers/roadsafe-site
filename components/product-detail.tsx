@@ -55,25 +55,24 @@ export function ProductDetail({ product }: { product: Product }) {
     },
     {
       "@context": "https://schema.org",
-      "@type": "Product",
-      "@id": `${absoluteUrl(productUrl)}#product`,
+      "@type": "Service",
+      "@id": `${absoluteUrl(productUrl)}#service`,
       name: product.name,
-      alternateName: product.shortName,
+      serviceType:
+        product.availability === "purchase"
+          ? `${product.name} supply`
+          : product.availability === "both"
+            ? `${product.name} rental and supply`
+            : `${product.name} rental`,
       description: product.description,
       url: absoluteUrl(productUrl),
-      image: [absoluteUrl(product.image)],
-      sku: product.slug,
-      category: product.categoryLabel,
-      brand: { "@type": "Brand", name: "Roadsafe Traffic" },
+      image: absoluteUrl(product.image),
+      provider: { "@id": `${SITE_URL}/#organization` },
+      areaServed: { "@type": "Country", name: "South Africa" },
       audience: {
         "@type": "BusinessAudience",
         audienceType: "Road construction and traffic management teams"
-      },
-      additionalProperty: product.specs.map((spec) => ({
-        "@type": "PropertyValue",
-        name: spec.label,
-        value: spec.indicative ? `${spec.value} (indicative)` : spec.value
-      }))
+      }
     }
   ];
 
